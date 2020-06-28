@@ -12,29 +12,14 @@ import javax.swing.ImageIcon;
  * @author atbat
  */
 public abstract class Piece {
-    private int xLoc;
-    private int yLoc;
+    
+    public static String whiteImg;
+    public static String blackImg;
+    private Player player;
+
     private ImageIcon pieceImage;
     
-    public Piece(int x, int y){ //add ImageIcon and player arguments
-        this.xLoc = x;
-        this.yLoc = y;
-    }
-
-    public int getxLoc() {
-        return xLoc;
-    }
-
-    public void setxLoc(int xLoc) {
-        this.xLoc = xLoc;
-    }
-
-    public int getyLoc() {
-        return yLoc;
-    }
-
-    public void setyLoc(int yLoc) {
-        this.yLoc = yLoc;
+    public Piece(Player player){ //add ImageIcon and player arguments
     }
 
     public ImageIcon getPieceImage() {
@@ -43,6 +28,14 @@ public abstract class Piece {
 
     public void setPieceImage(ImageIcon pieceImage) {
         this.pieceImage = pieceImage;
+    }
+    
+    public Player getPlayer() {
+        return player;
+    }
+
+    public void setPlayer(Player player) {
+        this.player = player;
     }
     
 }

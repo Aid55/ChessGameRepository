@@ -17,7 +17,9 @@ public class ChessGame extends JFrame{
     
     public ChessGame(){
         super();
-        Board board = new Board();
+        Player whitePlayer = new Player("White");
+        Player blackPlayer = new Player("Black");
+        Board board = new Board(whitePlayer, blackPlayer);
         this.setTitle("Chess Game by Aidan");
         this.add(board);
         board.setBackground(Color.red); //remove in future

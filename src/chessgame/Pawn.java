@@ -9,47 +9,52 @@ import java.awt.Image;
 import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
 
 /**
  *
  * @author atbat
  */
 public class Pawn extends Piece{
-        
-    public Pawn(int x, int y){
-        super(x, y);
-        this.loadImage();
-    }
     
-//    private void loadImage(){
-//        this.setPieceImage(new ImageIcon("images/WhitePawn.png"));
-//    }
-    public void loadImage() {
-        displayImage(getImage());
+    public static String whiteImg = "images/WhitePawn.png";
+    public static String blackImg = "images/BlackPawn.png";
+        
+    public Pawn(Player player){
+        super(player);
+        this.loadImage(player);
     }
 
-    private Image getImage() {
-        try {
-            return ImageIO.read(getClass().getResourceAsStream(
-                    "images/WhitePawn.png"));
-        } catch (IOException e) {
-            e.printStackTrace();
-            return null;
+    private void loadImage(Player player) {
+        if (player.getPieceColour() == "White"){
+            try {
+                Image img = ImageIO.read(getClass().getResourceAsStream(
+                        whiteImg));
+                this.setPieceImage(new ImageIcon(img));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
+        else if (player.getPieceColour() == "Black"){
+            try {
+                Image img = ImageIO.read(getClass().getResourceAsStream(
+                        blackImg));
+                this.setPieceImage(new ImageIcon(img));
+            } catch (IOException e) {
+                e.printStackTrace();
+        }
+        }
+        
+        
     }
 
-    public void displayImage(Image image) {
-        JLabel label = new JLabel(new ImageIcon(image));
-
-        JPanel panel = new JPanel();
-        panel.add(label);
-
-        JScrollPane scrollPane = new JScrollPane(panel);
-        JOptionPane.showMessageDialog(null, scrollPane);
-    }   
+//    public void loadImage(Image image) {
+//        JLabel label = new JLabel(new ImageIcon(image));
+//
+//        JPanel panel = new JPanel();
+//        panel.add(label);
+//
+//        JScrollPane scrollPane = new JScrollPane(panel);
+//        JOptionPane.showMessageDialog(null, scrollPane);
+//    }   
     
 }

@@ -21,7 +21,12 @@ public class Board extends JPanel implements ActionListener{
     private Square[][] squares = new Square[boardWidth][boardHeight];
     public Square selectedSquare;
     
-    public Board(){
+    private Player whitePlayer;
+    private Player blackPlayer;
+    
+    public Board(Player white, Player black){
+        this.whitePlayer = white;
+        this.blackPlayer = black;
         this.createBoard();
         this.setVisible(true);
     }
@@ -40,8 +45,22 @@ public class Board extends JPanel implements ActionListener{
     }
     
     private void addPieces(){
-        this.squares[3][4].setPieceOnSquare(new Pawn(3, 4));
-        
+        this.squares[0][1].setPieceOnSquare(new Pawn(this.blackPlayer));
+        this.squares[1][1].setPieceOnSquare(new Pawn(this.blackPlayer));
+        this.squares[2][1].setPieceOnSquare(new Pawn(this.blackPlayer));
+        this.squares[3][1].setPieceOnSquare(new Pawn(this.blackPlayer));
+        this.squares[4][1].setPieceOnSquare(new Pawn(this.blackPlayer));
+        this.squares[5][1].setPieceOnSquare(new Pawn(this.blackPlayer));
+        this.squares[6][1].setPieceOnSquare(new Pawn(this.blackPlayer));
+        this.squares[7][1].setPieceOnSquare(new Pawn(this.blackPlayer));
+        this.squares[0][6].setPieceOnSquare(new Pawn(this.whitePlayer));
+        this.squares[1][6].setPieceOnSquare(new Pawn(this.whitePlayer));
+        this.squares[2][6].setPieceOnSquare(new Pawn(this.whitePlayer));
+        this.squares[3][6].setPieceOnSquare(new Pawn(this.whitePlayer));
+        this.squares[4][6].setPieceOnSquare(new Pawn(this.whitePlayer));
+        this.squares[5][6].setPieceOnSquare(new Pawn(this.whitePlayer));
+        this.squares[6][6].setPieceOnSquare(new Pawn(this.whitePlayer));
+        this.squares[7][6].setPieceOnSquare(new Pawn(this.whitePlayer));
     }
     
     public void actionPerformed(ActionEvent e){

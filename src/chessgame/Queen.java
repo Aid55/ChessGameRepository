@@ -7,7 +7,6 @@ package chessgame;
 
 import java.awt.Image;
 import java.io.IOException;
-import java.util.ArrayList;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 
@@ -15,12 +14,12 @@ import javax.swing.ImageIcon;
  *
  * @author atbat
  */
-public class Pawn extends Piece{
+public class Queen extends Piece{
     
-    public static String whiteImg = "images/WhitePawn.png";
-    public static String blackImg = "images/BlackPawn.png";
+    public static String whiteImg = "images/WhiteQueen.png";
+    public static String blackImg = "images/BlackQueen.png";
         
-    public Pawn(Player player){
+    public Queen(Player player){
         super(player);
         this.loadImage(player);
     }
@@ -43,21 +42,12 @@ public class Pawn extends Piece{
             } catch (IOException e) {
                 e.printStackTrace();
             }
-        }
+        }        
     }
 
     @Override
-    public ArrayList<Integer[]> possibleMoves() {
-        ArrayList<Integer[]> moves = new ArrayList<>();
-        if(this.getPlayer().getPieceColour() == "White"){
-            moves.add(new Integer[]{this.getSquare().getXLoc(), this.getSquare().getYLoc() - 1});
-            moves.add(new Integer[]{this.getSquare().getXLoc(), this.getSquare().getYLoc() - 2});
-        }
-        else if (this.getPlayer().getPieceColour() == "Black"){
-            moves.add(new Integer[]{this.getSquare().getXLoc(), this.getSquare().getYLoc() + 1});
-            moves.add(new Integer[]{this.getSquare().getXLoc(), this.getSquare().getYLoc() + 2});
-        }
-        return moves;
+    public void possibleMoves() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }

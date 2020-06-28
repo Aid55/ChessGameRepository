@@ -19,7 +19,8 @@ public class Board extends JPanel implements ActionListener{
     public final int boardWidth = 8;
     public final int boardHeight = 8;
     private Square[][] squares = new Square[boardWidth][boardHeight];
-    public Square selectedSquare;
+    private Square selectedSquare;
+    private Square previousSquare;
     
     private Player whitePlayer;
     private Player blackPlayer;
@@ -53,6 +54,15 @@ public class Board extends JPanel implements ActionListener{
         this.squares[5][1].setPieceOnSquare(new Pawn(this.blackPlayer));
         this.squares[6][1].setPieceOnSquare(new Pawn(this.blackPlayer));
         this.squares[7][1].setPieceOnSquare(new Pawn(this.blackPlayer));
+        this.squares[4][0].setPieceOnSquare(new King(this.blackPlayer));
+        this.squares[3][0].setPieceOnSquare(new Queen(this.blackPlayer));
+        this.squares[0][0].setPieceOnSquare(new Rook(this.blackPlayer));
+        this.squares[7][0].setPieceOnSquare(new Rook(this.blackPlayer));
+        this.squares[2][0].setPieceOnSquare(new Bishop(this.blackPlayer));
+        this.squares[5][0].setPieceOnSquare(new Bishop(this.blackPlayer));
+        this.squares[1][0].setPieceOnSquare(new Knight(this.blackPlayer));
+        this.squares[6][0].setPieceOnSquare(new Knight(this.blackPlayer));
+        
         this.squares[0][6].setPieceOnSquare(new Pawn(this.whitePlayer));
         this.squares[1][6].setPieceOnSquare(new Pawn(this.whitePlayer));
         this.squares[2][6].setPieceOnSquare(new Pawn(this.whitePlayer));
@@ -61,16 +71,38 @@ public class Board extends JPanel implements ActionListener{
         this.squares[5][6].setPieceOnSquare(new Pawn(this.whitePlayer));
         this.squares[6][6].setPieceOnSquare(new Pawn(this.whitePlayer));
         this.squares[7][6].setPieceOnSquare(new Pawn(this.whitePlayer));
+        this.squares[3][7].setPieceOnSquare(new King(this.whitePlayer));
+        this.squares[4][7].setPieceOnSquare(new Queen(this.whitePlayer));
+        this.squares[0][7].setPieceOnSquare(new Rook(this.whitePlayer));
+        this.squares[7][7].setPieceOnSquare(new Rook(this.whitePlayer));
+        this.squares[2][7].setPieceOnSquare(new Bishop(this.whitePlayer));
+        this.squares[5][7].setPieceOnSquare(new Bishop(this.whitePlayer));
+        this.squares[1][7].setPieceOnSquare(new Knight(this.whitePlayer));
+        this.squares[6][7].setPieceOnSquare(new Knight(this.whitePlayer));
+        
     }
     
-    public void actionPerformed(ActionEvent e){
-        this.selectedSquare = (Square) e.getSource();
-        if (this.selectedSquare.getColour() == Color.GRAY){
-            this.selectedSquare.setColour(Color.WHITE);
+    public void actionPerformed(ActionEvent anEvent){
+        this.setPreviousSquare(this.getSelectedSquare());
+        this.setSelectedSquare((Square) anEvent.getSource());
+        if (this.getSelectedSquare().getPieceOnSquare() != null){
+            for (Integer[] loc : this.getSelectedSquare().getPieceOnSquare().possibleMoves()){
+                System.out.println(String.format("%d , %d", loc[0], loc[1]));
+                this.getSquares()[loc[0]][loc[1]].setColour(Color.blue);
+            }
         }
-        else{
-            this.selectedSquare.setColour(Color.GRAY);
-        }
+//        if (this.selectedSquare.getColour() == Color.GRAY){
+//            this.selectedSquare.setColour(Color.WHITE);
+//        }
+//        else{
+//            this.selectedSquare.setColour(Color.GRAY);
+//        }
+//        if (this.selectedSquare.getPieceOnSquare() != null){
+//            System.out.println(this.selectedSquare.getPieceOnSquare().toString());
+//        }
+//        else{
+//            System.out.println("Nothing on this square");
+//        }
     }
     
     public Square[][] getSquares() {
@@ -80,4 +112,22 @@ public class Board extends JPanel implements ActionListener{
     public void setSquares(Square[][] squares) {
         this.squares = squares;
     }
+
+    public Square getSelectedSquare() {
+        return selectedSquare;
+    }
+
+    public void setSelectedSquare(Square selectedSquare) {
+        this.selectedSquare = selectedSquare;
+    }
+
+    public Square getPreviousSquare() {
+        return previousSquare;
+    }
+
+    public void setPreviousSquare(Square previousSquare) {
+        this.previousSquare = previousSquare;
+    }
+    
+    
 }

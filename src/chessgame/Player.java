@@ -24,6 +24,11 @@ public class Player {
     public void setPieceColour(String pieceColour) {
         this.pieceColour = pieceColour;
     }
+
+    @Override
+    public String toString() {
+        return "Player{" + "pieceColour=" + pieceColour + '}';
+    }
     
     
     

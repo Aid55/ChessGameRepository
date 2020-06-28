@@ -17,9 +17,10 @@ public class Square extends JButton{
     private int x;
     private int y;
     private Piece pieceOnSquare;
-
+    
     public Square(int x, int y){
         super(String.valueOf(x) + ", " + String.valueOf(y));
+//        super();
         this.x = x;
         this.y = y;
         if ((x % 2 == 0 && y % 2 == 0) || (x % 2 == 1 && y % 2 == 1)){
@@ -43,7 +44,7 @@ public class Square extends JButton{
         return x;
     }
 
-    public void setX(int x) {
+    public void setXLoc(int x) {
         this.x = x;
     }
 
@@ -51,7 +52,7 @@ public class Square extends JButton{
         return y;
     }
 
-    public void setY(int y) {
+    public void setYLoc(int y) {
         this.y = y;
     }
     
@@ -61,6 +62,7 @@ public class Square extends JButton{
 
     public void setPieceOnSquare(Piece pieceOnSquare) {
         this.pieceOnSquare = pieceOnSquare;
+        pieceOnSquare.setSquare(this);
         this.setIcon(this.pieceOnSquare.getPieceImage());
     }
     

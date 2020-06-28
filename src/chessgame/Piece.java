@@ -5,6 +5,7 @@
  */
 package chessgame;
 
+import java.util.ArrayList;
 import javax.swing.ImageIcon;
 
 /**
@@ -16,10 +17,12 @@ public abstract class Piece {
     public static String whiteImg;
     public static String blackImg;
     private Player player;
+    private Square square;
 
     private ImageIcon pieceImage;
     
-    public Piece(Player player){ //add ImageIcon and player arguments
+    public Piece(Player player){
+        this.player = player;
     }
 
     public ImageIcon getPieceImage() {
@@ -37,5 +40,22 @@ public abstract class Piece {
     public void setPlayer(Player player) {
         this.player = player;
     }
+
+    public Square getSquare() {
+        return square;
+    }
+
+    public void setSquare(Square square) {
+        this.square = square;
+    }
+    
+    public abstract ArrayList<Integer[]> possibleMoves();
+
+    @Override
+    public String toString() {
+        return "Piece{" + "player=" + player.toString() + ", pieceImage=" + pieceImage.toString() + '}';
+    }
+    
+    
     
 }

@@ -23,13 +23,17 @@ public class Square extends JButton{
 //        super();
         this.x = x;
         this.y = y;
+        this.initColour();
+        this.setOpaque(true);
+    }
+    
+    public void initColour(){
         if ((x % 2 == 0 && y % 2 == 0) || (x % 2 == 1 && y % 2 == 1)){
             this.setColour(Color.GRAY);
         }
         else{
             this.setColour(Color.WHITE);
         }
-        this.setOpaque(true);
     }
 
     public Color getColour() {

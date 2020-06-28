@@ -86,10 +86,13 @@ public class Board extends JPanel implements ActionListener{
         this.setPreviousSquare(this.getSelectedSquare());
         this.setSelectedSquare((Square) anEvent.getSource());
         if (this.getSelectedSquare().getPieceOnSquare() != null){
-            for (Integer[] loc : this.getSelectedSquare().getPieceOnSquare().possibleMoves()){
-                System.out.println(String.format("%d , %d", loc[0], loc[1]));
-                this.getSquares()[loc[0]][loc[1]].setColour(Color.blue);
+            //Recolour the board to remove other colours
+            for (int y=0; y<boardHeight; y++){
+                for (int x=0; x<boardWidth; x++){
+                    this.squares[x][y].initColour();
+                }
             }
+            this.getSelectedSquare().getPieceOnSquare().possibleMoves(this.getSquares());
         }
 //        if (this.selectedSquare.getColour() == Color.GRAY){
 //            this.selectedSquare.setColour(Color.WHITE);

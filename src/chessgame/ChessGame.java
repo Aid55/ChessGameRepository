@@ -28,7 +28,7 @@ public class ChessGame extends JFrame{
         this.pack();
         this.setVisible(true);
         
-        Game game = new Game(board);
+        Game game = new Game(board, whitePlayer, blackPlayer);
     }
 
     /**

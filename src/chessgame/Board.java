@@ -50,16 +50,16 @@ public class Board extends JPanel implements ActionListener{
         this.squares[1][1].setPieceOnSquare(new Pawn(this.blackPlayer));
         this.squares[2][1].setPieceOnSquare(new Pawn(this.blackPlayer));
         this.squares[3][1].setPieceOnSquare(new Pawn(this.blackPlayer));
-        this.squares[4][1].setPieceOnSquare(new Pawn(this.blackPlayer));
+        this.squares[4][5].setPieceOnSquare(new Pawn(this.blackPlayer));//reset y
         this.squares[5][1].setPieceOnSquare(new Pawn(this.blackPlayer));
         this.squares[6][1].setPieceOnSquare(new Pawn(this.blackPlayer));
         this.squares[7][1].setPieceOnSquare(new Pawn(this.blackPlayer));
         this.squares[4][0].setPieceOnSquare(new King(this.blackPlayer));
         this.squares[3][0].setPieceOnSquare(new Queen(this.blackPlayer));
-        this.squares[0][0].setPieceOnSquare(new Rook(this.blackPlayer));
+        this.squares[0][0].setPieceOnSquare(new Rook(this.blackPlayer));//reset y
         this.squares[7][0].setPieceOnSquare(new Rook(this.blackPlayer));
         this.squares[2][0].setPieceOnSquare(new Bishop(this.blackPlayer));
-        this.squares[5][0].setPieceOnSquare(new Bishop(this.blackPlayer));
+        this.squares[5][5].setPieceOnSquare(new Bishop(this.blackPlayer));
         this.squares[1][0].setPieceOnSquare(new Knight(this.blackPlayer));
         this.squares[6][0].setPieceOnSquare(new Knight(this.blackPlayer));
         
@@ -82,17 +82,22 @@ public class Board extends JPanel implements ActionListener{
         
     }
     
+    public void recolourBoard(){
+        for (int y=0; y<boardHeight; y++){
+            for (int x=0; x<boardWidth; x++){
+                this.squares[x][y].initColour();
+            }
+        }
+    }
+    
     public void actionPerformed(ActionEvent anEvent){
         this.setPreviousSquare(this.getSelectedSquare());
         this.setSelectedSquare((Square) anEvent.getSource());
         if (this.getSelectedSquare().getPieceOnSquare() != null){
-            //Recolour the board to remove other colours
-            for (int y=0; y<boardHeight; y++){
-                for (int x=0; x<boardWidth; x++){
-                    this.squares[x][y].initColour();
-                }
+            this.recolourBoard();
+            for (Integer[] loc : this.getSelectedSquare().getPieceOnSquare().findPossibleMoves(this.getSquares())){
+                this.getSquares()[loc[0]][loc[1]].setColour(Color.yellow);
             }
-            this.getSelectedSquare().getPieceOnSquare().possibleMoves(this.getSquares());
         }
 //        if (this.selectedSquare.getColour() == Color.GRAY){
 //            this.selectedSquare.setColour(Color.WHITE);

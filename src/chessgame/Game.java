@@ -12,9 +12,15 @@ package chessgame;
 public class Game {
     
     private Board board;
+    private Player white;
+    private Player black;
+    private boolean gameOver = false;
     
-    public Game(Board board){
+    public Game(Board board, Player white, Player black){
         this.board = board;
+        this.white = white;
+        this.black = black;
+        this.startGame();
     }
 
     public Board getBoard() {
@@ -24,6 +30,10 @@ public class Game {
     public void setBoard(Board board) {
         this.board = board;
     }
-
+    
+    private void startGame(){
+//        while (gameOver != true){
+//        }
+    }
     
 }

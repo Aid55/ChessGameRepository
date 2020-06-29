@@ -7,6 +7,7 @@ package chessgame;
 
 import java.awt.Image;
 import java.io.IOException;
+import java.util.ArrayList;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 
@@ -46,7 +47,7 @@ public class Rook extends Piece{
     }
 
     @Override
-    public void possibleMoves() {
+    public ArrayList<Integer[]> findPossibleMoves(Square[][] squares) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     

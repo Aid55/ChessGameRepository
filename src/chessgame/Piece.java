@@ -49,7 +49,7 @@ public abstract class Piece {
         this.square = square;
     }
     
-    public abstract void possibleMoves(Square[][] squares);
+    public abstract ArrayList<Integer[]> findPossibleMoves(Square[][] squares);
 
     @Override
     public String toString() {

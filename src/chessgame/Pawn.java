@@ -20,6 +20,8 @@ public class Pawn extends Piece{
     
     public static String whiteImg = "images/WhitePawn.png";
     public static String blackImg = "images/BlackPawn.png";
+    private boolean firstMove = true;
+    private ArrayList<Integer[]> possibleMoves = new ArrayList<>();
         
     public Pawn(Player player){
         super(player);
@@ -46,27 +48,70 @@ public class Pawn extends Piece{
             }
         }
     }
-
+    
     @Override
-    public void possibleMoves(Square[][] squares) {
+    public ArrayList<Integer[]> findPossibleMoves(Square[][] squares) {
         Square sq = this.getSquare();
         sq.setColour(Color.ORANGE);
+        this.getPossibleMoves().clear();
         if (this.getPlayer().getPieceColour() == "White"){
-            if (sq.getYLoc() - 1 >= 0){
-                squares[sq.getXLoc()][sq.getYLoc() - 1].setColour(Color.yellow);
+            // check for single square move up
+            if (sq.getYLoc() - 1 >= 0 && squares[sq.getXLoc()][sq.getYLoc() - 1].getPieceOnSquare() == null){
+                possibleMoves.add(new Integer[]{sq.getXLoc(), sq.getYLoc() - 1});
             }
-            if (sq.getYLoc() - 2 >= 0){
-                squares[sq.getXLoc()][sq.getYLoc() - 2].setColour(Color.yellow);
+            // check for double square move up
+            if (sq.getYLoc() - 2 >= 0 && squares[sq.getXLoc()][sq.getYLoc() - 1].getPieceOnSquare() == null 
+                    && squares[sq.getXLoc()][sq.getYLoc() - 2].getPieceOnSquare() == null
+                    && this.isFirstMove() == true){
+                possibleMoves.add(new Integer[]{sq.getXLoc(), sq.getYLoc() - 2});
+            }
+            // check for left diagonal capture
+            if (sq.getYLoc() - 1 >= 0 && sq.getXLoc() - 1 >= 0 && squares[sq.getXLoc() - 1][sq.getYLoc() - 1].getPieceOnSquare() != null){
+                possibleMoves.add(new Integer[]{sq.getXLoc() - 1, sq.getYLoc() - 1});
+            }
+            // check for right diagonal capture
+            if (sq.getYLoc() - 1 >= 0 && sq.getXLoc() + 1 <= 7 && squares[sq.getXLoc() + 1][sq.getYLoc() - 1].getPieceOnSquare() != null){
+                possibleMoves.add(new Integer[]{sq.getXLoc() + 1, sq.getYLoc() - 1});
             }
         }
         else if (this.getPlayer().getPieceColour() == "Black"){
-            if (sq.getYLoc() + 1 >= 0){
-                squares[sq.getXLoc()][sq.getYLoc() + 1].setColour(Color.yellow);
+            // check for single square move down
+            if (sq.getYLoc() + 1 <= 7 && squares[sq.getXLoc()][sq.getYLoc() + 1].getPieceOnSquare() == null){
+                possibleMoves.add(new Integer[]{sq.getXLoc(), sq.getYLoc() + 1});
             }
-            if (sq.getYLoc() + 2 >= 0){
-                squares[sq.getXLoc()][sq.getYLoc() + 2].setColour(Color.yellow);
+            // check for double square move down
+            if (sq.getYLoc() + 2 <= 7 && squares[sq.getXLoc()][sq.getYLoc() + 1].getPieceOnSquare() == null 
+                    && squares[sq.getXLoc()][sq.getYLoc() + 2].getPieceOnSquare() == null
+                    && this.isFirstMove() == true){
+                possibleMoves.add(new Integer[]{sq.getXLoc(), sq.getYLoc() + 2});
+            }
+            // check for left diagonal capture
+            if (sq.getYLoc() + 1 <= 7 && sq.getXLoc() - 1 >= 0 && squares[sq.getXLoc() - 1][sq.getYLoc() + 1].getPieceOnSquare() != null){
+                possibleMoves.add(new Integer[]{sq.getXLoc() - 1, sq.getYLoc() + 1});
+            }
+            // check for right diagonal capture
+            if (sq.getYLoc() + 1 <= 7 && sq.getXLoc() + 1 <= 7 && squares[sq.getXLoc() + 1][sq.getYLoc() + 1].getPieceOnSquare() != null){
+                possibleMoves.add(new Integer[]{sq.getXLoc() + 1, sq.getYLoc() + 1});
             }
         }
+        this.setFirstMove(false);//to be moved to makeMove method when created
+        return this.getPossibleMoves();
     }
-    
+
+    public boolean isFirstMove() {
+        return firstMove;
+    }
+
+    public void setFirstMove(boolean firstMove) {
+        this.firstMove = firstMove;
+    }
+
+    public ArrayList<Integer[]> getPossibleMoves() {
+        return possibleMoves;
+    }
+
+    public void setPossibleMoves(ArrayList<Integer[]> possibleMoves) {
+        this.possibleMoves = possibleMoves;
+    }
+        
 }

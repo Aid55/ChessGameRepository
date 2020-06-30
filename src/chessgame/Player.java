@@ -16,6 +16,10 @@ public class Player {
     public Player(String pieceColour) {
         this.pieceColour = pieceColour;
     }
+    
+//    public void makeMove(){
+//        System.out.println("");
+//    }
 
     public String getPieceColour() {
         return pieceColour;
@@ -24,6 +28,7 @@ public class Player {
     public void setPieceColour(String pieceColour) {
         this.pieceColour = pieceColour;
     }
+    
 
     @Override
     public String toString() {

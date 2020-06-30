@@ -7,20 +7,17 @@ package chessgame;
 
 import java.awt.Color;
 import java.awt.GridLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import javax.swing.JPanel;
 
 /**
  *
  * @author atbat
  */
-public class Board extends JPanel implements ActionListener{
+public class Board extends JPanel{
     public final int boardWidth = 8;
     public final int boardHeight = 8;
     private Square[][] squares = new Square[boardWidth][boardHeight];
-    private Square selectedSquare;
-    private Square previousSquare;
     
     private Player whitePlayer;
     private Player blackPlayer;
@@ -37,7 +34,6 @@ public class Board extends JPanel implements ActionListener{
         for (int y=0; y<boardHeight; y++){
             for (int x=0; x<boardWidth; x++){
                 this.squares[x][y] = new Square(x, y);
-                this.squares[x][y].addActionListener(this);
                 this.add(squares[x][y]);
             }
         }
@@ -59,7 +55,7 @@ public class Board extends JPanel implements ActionListener{
         this.squares[0][0].setPieceOnSquare(new Rook(this.blackPlayer));//reset y
         this.squares[7][0].setPieceOnSquare(new Rook(this.blackPlayer));
         this.squares[2][0].setPieceOnSquare(new Bishop(this.blackPlayer));
-        this.squares[5][5].setPieceOnSquare(new Bishop(this.blackPlayer));
+        this.squares[5][0].setPieceOnSquare(new Bishop(this.blackPlayer));
         this.squares[1][0].setPieceOnSquare(new Knight(this.blackPlayer));
         this.squares[6][0].setPieceOnSquare(new Knight(this.blackPlayer));
         
@@ -90,52 +86,31 @@ public class Board extends JPanel implements ActionListener{
         }
     }
     
-    public void actionPerformed(ActionEvent anEvent){
-        this.setPreviousSquare(this.getSelectedSquare());
-        this.setSelectedSquare((Square) anEvent.getSource());
-        if (this.getSelectedSquare().getPieceOnSquare() != null){
-            this.recolourBoard();
-            for (Integer[] loc : this.getSelectedSquare().getPieceOnSquare().findPossibleMoves(this.getSquares())){
-                this.getSquares()[loc[0]][loc[1]].setColour(Color.yellow);
-            }
-        }
-//        if (this.selectedSquare.getColour() == Color.GRAY){
-//            this.selectedSquare.setColour(Color.WHITE);
-//        }
-//        else{
-//            this.selectedSquare.setColour(Color.GRAY);
-//        }
-//        if (this.selectedSquare.getPieceOnSquare() != null){
-//            System.out.println(this.selectedSquare.getPieceOnSquare().toString());
-//        }
-//        else{
-//            System.out.println("Nothing on this square");
-//        }
+    public void showPossibleMoves(ArrayList<Square> possibleMoves){
+        this.recolourBoard();
+        for (Square sq : possibleMoves){
+            sq.setColour(Color.yellow);
+        }    
     }
     
+    public void setSelectedSquareColour(Square s){
+        s.setColour(Color.ORANGE);
+    }
+
+    public int getBoardWidth() {
+        return boardWidth;
+    }
+
+    public int getBoardHeight() {
+        return boardHeight;
+    }
+
     public Square[][] getSquares() {
         return squares;
     }
 
     public void setSquares(Square[][] squares) {
         this.squares = squares;
-    }
-
-    public Square getSelectedSquare() {
-        return selectedSquare;
-    }
-
-    public void setSelectedSquare(Square selectedSquare) {
-        this.selectedSquare = selectedSquare;
-    }
-
-    public Square getPreviousSquare() {
-        return previousSquare;
-    }
-
-    public void setPreviousSquare(Square previousSquare) {
-        this.previousSquare = previousSquare;
-    }
-    
+    }   
     
 }

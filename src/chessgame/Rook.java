@@ -47,7 +47,7 @@ public class Rook extends Piece{
     }
 
     @Override
-    public ArrayList<Integer[]> findPossibleMoves(Square[][] squares) {
+    public ArrayList<Square> findPossibleMoves(Square[][] squares) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     

@@ -17,18 +17,20 @@ public class ChessGame extends JFrame{
     
     public ChessGame(){
         super();
-        Player whitePlayer = new Player("White");
-        Player blackPlayer = new Player("Black");
-        Board board = new Board(whitePlayer, blackPlayer);
-        this.setTitle("Chess Game by Aidan");
-        this.add(board);
+        
+        Board board = new Board();
+        Player whitePlayer = new Player("White", board.getSquares());
+        Player blackPlayer = new Player("Black", board.getSquares());
+        super.setTitle("Chess Game by Aidan");
+        super.add(board);
         board.setBackground(Color.red); //remove in future
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setPreferredSize(new Dimension(800,800));
-        this.pack();
-        this.setVisible(true);
+        super.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        super.setPreferredSize(new Dimension(800,800));
+        super.pack();
+        super.setVisible(true);
         
         Game game = new Game(board, board.getSquares(), whitePlayer, blackPlayer);
+        System.out.println("");
     }
 
     /**

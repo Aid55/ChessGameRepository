@@ -47,12 +47,14 @@ public class Pawn extends Piece{
                 e.printStackTrace();
             }
         }
+        else{
+            System.out.println("No Image found for " + player.getPieceColour());
+        }
     }
     
     @Override
     public ArrayList<Square> findPossibleMoves(Square[][] squares) {
         Square sq = this.getSquare();
-        sq.setColour(Color.ORANGE);
         this.getPossibleMoves().clear();
         if (this.getPlayer().getPieceColour() == "White" ){
             // check for single square move up
@@ -94,7 +96,7 @@ public class Pawn extends Piece{
                 possibleMoves.add(squares[sq.getXLoc() + 1][sq.getYLoc() + 1]);
             }
         }
-        this.setFirstMove(false);//to be moved to makeMove method when created
+//        this.setFirstMove(false);//to be moved to makeMove method when created
         return this.getPossibleMoves();
     }
 

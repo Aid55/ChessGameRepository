@@ -70,6 +70,11 @@ public class Square extends JButton{
         this.setIcon(this.pieceOnSquare.getPieceImage());
     }
     
+    public void removePieceOnSquare(){
+        this.pieceOnSquare = null;
+        this.setIcon(null);
+    }
+    
     @Override
     public String toString() {
         return "Square{" + "x=" + x + ", y=" + y + '}';

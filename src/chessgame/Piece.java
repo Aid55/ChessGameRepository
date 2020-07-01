@@ -21,6 +21,9 @@ public abstract class Piece {
 
     private ImageIcon pieceImage;
     
+    
+    private ArrayList<Square> possibleMoves = new ArrayList<>();
+    
     public Piece(Player player){
         this.player = player;
     }
@@ -47,6 +50,14 @@ public abstract class Piece {
 
     public void setSquare(Square square) {
         this.square = square;
+    }
+    
+    public ArrayList<Square> getPossibleMoves() {
+        return possibleMoves;
+    }
+
+    public void setPossibleMoves(ArrayList<Square> possibleMoves) {
+        this.possibleMoves = possibleMoves;
     }
     
     public abstract ArrayList<Square> findPossibleMoves(Square[][] squares);

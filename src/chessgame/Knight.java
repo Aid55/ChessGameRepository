@@ -5,6 +5,7 @@
  */
 package chessgame;
 
+import java.awt.Color;
 import java.awt.Image;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -19,6 +20,7 @@ public class Knight extends Piece{
     
     public static String whiteImg = "images/WhiteKnight.png";
     public static String blackImg = "images/BlackKnight.png";
+    private ArrayList<Square> possibleMoves = new ArrayList<>();
         
     public Knight(Player player){
         super(player);
@@ -48,7 +50,83 @@ public class Knight extends Piece{
 
     @Override
     public ArrayList<Square> findPossibleMoves(Square[][] squares) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Square sq = this.getSquare();
+        this.getPossibleMoves().clear();
+        Square sqToCheck = null;
+        // 1 up 2 left
+        if (sq.getXLoc() - 2 >= 0 && sq.getYLoc() - 1 >= 0){
+            sqToCheck = squares[sq.getXLoc() - 2][sq.getYLoc() - 1];
+            if(sqToCheck.getPieceOnSquare() == null || sqToCheck.getPieceOnSquare().getPlayer() != sq.getPieceOnSquare().getPlayer()){
+                possibleMoves.add(sqToCheck);
+            }
+        }
+        // 1 up 2 right
+        if (sq.getXLoc() + 2 <= 7 && sq.getYLoc() - 1 >= 0){ 
+            sqToCheck = squares[sq.getXLoc() + 2][sq.getYLoc() - 1];
+            if(sqToCheck.getPieceOnSquare() == null || sqToCheck.getPieceOnSquare().getPlayer() != sq.getPieceOnSquare().getPlayer()){
+                possibleMoves.add(sqToCheck);
+            }
+        }
+        // 2 up 1 left
+        
+        if (sq.getXLoc() - 1 >= 0 && sq.getYLoc() - 2 >= 0){
+            sqToCheck = squares[sq.getXLoc() - 1][sq.getYLoc() - 2];
+            if(sqToCheck.getPieceOnSquare() == null || sqToCheck.getPieceOnSquare().getPlayer() != sq.getPieceOnSquare().getPlayer()){
+                possibleMoves.add(sqToCheck);
+            }
+            
+        }
+        // 2 up 1 right
+        
+        if (sq.getXLoc() + 1 <= 7 && sq.getYLoc() - 2 >= 0){
+            sqToCheck = squares[sq.getXLoc() + 1][sq.getYLoc() - 2];
+            if(sqToCheck.getPieceOnSquare() == null || sqToCheck.getPieceOnSquare().getPlayer() != sq.getPieceOnSquare().getPlayer()){
+                possibleMoves.add(sqToCheck);
+            }
+        }
+        // 1 down 2 left
+        
+        if (sq.getXLoc() - 2 >= 0 && sq.getYLoc() + 1 <= 7){
+            sqToCheck = squares[sq.getXLoc() - 2][sq.getYLoc() + 1];
+            if(sqToCheck.getPieceOnSquare() == null || sqToCheck.getPieceOnSquare().getPlayer() != sq.getPieceOnSquare().getPlayer()){
+                possibleMoves.add(sqToCheck);
+            }
+        }
+        // 1 down 2 right
+        
+        if (sq.getXLoc() + 2 <= 7 && sq.getYLoc() + 1 <= 7){
+            sqToCheck = squares[sq.getXLoc() + 2][sq.getYLoc() + 1];
+            if(sqToCheck.getPieceOnSquare() == null || sqToCheck.getPieceOnSquare().getPlayer() != sq.getPieceOnSquare().getPlayer()){
+                possibleMoves.add(sqToCheck);
+            }
+        }
+        // 2 down 1 left
+        
+        if (sq.getXLoc() - 1 >= 0 && sq.getYLoc() + 2 <= 7){
+            sqToCheck = squares[sq.getXLoc() - 1][sq.getYLoc() + 2];
+            if(sqToCheck.getPieceOnSquare() == null || sqToCheck.getPieceOnSquare().getPlayer() != sq.getPieceOnSquare().getPlayer()){
+                possibleMoves.add(sqToCheck);
+            }
+        }
+        // 2 down 1 right
+        
+        if (sq.getXLoc() + 1 <= 7 && sq.getYLoc() + 2 <= 7){
+            sqToCheck = squares[sq.getXLoc() + 1][sq.getYLoc() + 2];
+            if(sqToCheck.getPieceOnSquare() == null || sqToCheck.getPieceOnSquare().getPlayer() != sq.getPieceOnSquare().getPlayer()){
+                possibleMoves.add(sqToCheck);
+            }
+        }
+        
+        return this.getPossibleMoves();
+    }
+    
+    public ArrayList<Square> getPossibleMoves() {
+        return possibleMoves;
+    }
+
+    public void setPossibleMoves(ArrayList<Square> possibleMoves) {
+        this.possibleMoves = possibleMoves;
     }
     
 }

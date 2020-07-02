@@ -5,8 +5,8 @@
  */
 package chessgame;
 
-import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 import javax.swing.JFrame;
 
 /**
@@ -17,20 +17,27 @@ public class ChessGame extends JFrame{
     
     public ChessGame(){
         super();
+        super.setTitle("Chess Game by Aidan");
+        
+        super.setLayout(new FlowLayout());
+        
+        ScorePanel scorePanel = new ScorePanel();
+        scorePanel.setPreferredSize(new Dimension(200,800));
+        super.add(scorePanel);
         
         Board board = new Board();
+        board.setPreferredSize(new Dimension(800,800));
+        super.add(board);
+        
         Player whitePlayer = new Player("White", board.getSquares());
         Player blackPlayer = new Player("Black", board.getSquares());
-        super.setTitle("Chess Game by Aidan");
-        super.add(board);
-        board.setBackground(Color.red); //remove in future
+        
         super.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        super.setPreferredSize(new Dimension(800,800));
+//        super.setPreferredSize(new Dimension(1200,800));
         super.pack();
         super.setVisible(true);
         
         Game game = new Game(board, board.getSquares(), whitePlayer, blackPlayer);
-        System.out.println("");
     }
 
     /**

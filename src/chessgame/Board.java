@@ -15,8 +15,8 @@ import javax.swing.JPanel;
  * @author atbat
  */
 public class Board extends JPanel{
-    public final int boardWidth = 8;
-    public final int boardHeight = 8;
+    public static final int boardWidth = 8;
+    public static final int boardHeight = 8;
     private Square[][] squares = new Square[boardWidth][boardHeight];
     
     

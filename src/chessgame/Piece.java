@@ -5,68 +5,107 @@
  */
 package chessgame;
 
+import java.awt.Image;
+import java.io.IOException;
 import java.util.ArrayList;
+import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 
 /**
  *
  * @author atbat
- */
-public abstract class Piece {
+ */ public abstract class Piece {
     
-    public static String whiteImg;
-    public static String blackImg;
+    private String whiteImg;
+    private String blackImg;
     private Player player;
     private Square square;
-
     private ImageIcon pieceImage;
-    
-    
     private ArrayList<Square> possibleMoves = new ArrayList<>();
     
     public Piece(Player player){
         this.player = player;
     }
+    
+    protected void loadImage(Player player) {
+        if (whiteImg != null && blackImg != null){
+            switch (player.getPieceColour()) {
+                case "White":
+                    try {
+                        Image img = ImageIO.read(getClass().getResourceAsStream(
+                                whiteImg));
+                        this.setPieceImage(new ImageIcon(img));
+                    } catch (IOException e) {
+                        System.out.println(e);
+                    }   break;
+                case "Black":
+                    try {
+                        Image img = ImageIO.read(getClass().getResourceAsStream(
+                                blackImg));
+                        this.setPieceImage(new ImageIcon(img));
+                    } catch (IOException e) {
+                        System.out.println(e);
+                    }   break;
+                default:
+                    System.out.println("No Image found for " + player.getPieceColour());
+                    break;
+            }
+        }
+        
+    }
 
-    public ImageIcon getPieceImage() {
+    protected ImageIcon getPieceImage() {
         return pieceImage;
     }
 
-    public void setPieceImage(ImageIcon pieceImage) {
+    protected void setPieceImage(ImageIcon pieceImage) {
         this.pieceImage = pieceImage;
     }
     
-    public Player getPlayer() {
+    protected Player getPlayer() {
         return player;
     }
 
-    public void setPlayer(Player player) {
+    protected void setPlayer(Player player) {
         this.player = player;
     }
 
-    public Square getSquare() {
+    protected Square getSquare() {
         return square;
     }
 
-    public void setSquare(Square square) {
+    protected void setSquare(Square square) {
         this.square = square;
     }
     
-    public ArrayList<Square> getPossibleMoves() {
+    protected ArrayList<Square> getPossibleMoves() {
         return possibleMoves;
     }
 
-    public void setPossibleMoves(ArrayList<Square> possibleMoves) {
+    protected void setPossibleMoves(ArrayList<Square> possibleMoves) {
         this.possibleMoves = possibleMoves;
     }
     
-    public abstract ArrayList<Square> findPossibleMoves(Square[][] squares);
+    protected String getWhiteImg() {
+        return whiteImg;
+    }
+
+    protected void setWhiteImg(String whiteImg) {
+        this.whiteImg = whiteImg;
+    }
+
+    protected String getBlackImg() {
+        return blackImg;
+    }
+
+    protected void setBlackImg(String blackImg) {
+        this.blackImg = blackImg;
+    }
+    
+    protected abstract ArrayList<Square> findPossibleMoves(Square[][] squares);
 
     @Override
     public String toString() {
         return "Piece{" + "player=" + player.toString() + ", pieceImage=" + pieceImage.toString() + '}';
-    }
-    
-    
-    
+    }   
 }

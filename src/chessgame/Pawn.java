@@ -5,12 +5,7 @@
  */
 package chessgame;
 
-import java.awt.Color;
-import java.awt.Image;
-import java.io.IOException;
 import java.util.ArrayList;
-import javax.imageio.ImageIO;
-import javax.swing.ImageIcon;
 
 /**
  *
@@ -18,86 +13,90 @@ import javax.swing.ImageIcon;
  */
 public class Pawn extends Piece{
     
-    public static String whiteImg = "images/WhitePawn.png";
-    public static String blackImg = "images/BlackPawn.png";
     private boolean firstMove = true;
-    private ArrayList<Square> possibleMoves = new ArrayList<>();
         
     public Pawn(Player player){
         super(player);
-        this.loadImage(player);
-    }
-
-    private void loadImage(Player player) {
-        if (player.getPieceColour() == "White"){
-            try {
-                Image img = ImageIO.read(getClass().getResourceAsStream(
-                        whiteImg));
-                this.setPieceImage(new ImageIcon(img));
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-        else if (player.getPieceColour() == "Black"){
-            try {
-                Image img = ImageIO.read(getClass().getResourceAsStream(
-                        blackImg));
-                this.setPieceImage(new ImageIcon(img));
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-        else{
-            System.out.println("No Image found for " + player.getPieceColour());
-        }
+        super.setWhiteImg("images/WhitePawn.png");
+        super.setBlackImg("images/BlackPawn.png");
+        super.loadImage(player);
     }
     
     @Override
     public ArrayList<Square> findPossibleMoves(Square[][] squares) {
         Square sq = this.getSquare();
         this.getPossibleMoves().clear();
-        if (this.getPlayer().getPieceColour() == "White" ){
+        Square sqToCheck = null;
+        if (this.getPlayer().getPieceColour().equals("White")){
             // check for single square move up
             if (sq.getYLoc() - 1 >= 0 && squares[sq.getXLoc()][sq.getYLoc() - 1].getPieceOnSquare() == null){
-                possibleMoves.add(squares[sq.getXLoc()][sq.getYLoc() - 1]);
+                sqToCheck = squares[sq.getXLoc()][sq.getYLoc() - 1];
+                this.getPossibleMoves().add(sqToCheck);
             }
             // check for double square move up
             if (sq.getYLoc() - 2 >= 0 && squares[sq.getXLoc()][sq.getYLoc() - 1].getPieceOnSquare() == null 
                     && squares[sq.getXLoc()][sq.getYLoc() - 2].getPieceOnSquare() == null
                     && this.isFirstMove() == true){
-                possibleMoves.add(squares[sq.getXLoc()][sq.getYLoc() - 2]);
+                sqToCheck = squares[sq.getXLoc()][sq.getYLoc() - 2];
+                this.getPossibleMoves().add(sqToCheck);
             }
             // check for left diagonal capture
-            if (sq.getYLoc() - 1 >= 0 && sq.getXLoc() - 1 >= 0 && squares[sq.getXLoc() - 1][sq.getYLoc() - 1].getPieceOnSquare() != null){
-                possibleMoves.add(squares[sq.getXLoc() - 1][sq.getYLoc() - 1]);
+            if (sq.getYLoc() - 1 >= 0 && sq.getXLoc() - 1 >= 0){
+                sqToCheck = squares[sq.getXLoc() - 1][sq.getYLoc() - 1];
+                if (this.checkCapture(sqToCheck)){
+                    this.getPossibleMoves().add(sqToCheck);
+                }
             }
             // check for right diagonal capture
-            if (sq.getYLoc() - 1 >= 0 && sq.getXLoc() + 1 < Board.boardWidth && squares[sq.getXLoc() + 1][sq.getYLoc() - 1].getPieceOnSquare() != null){
-                possibleMoves.add(squares[sq.getXLoc() + 1][sq.getYLoc() - 1]);
+            if (sq.getYLoc() - 1 >= 0 && sq.getXLoc() + 1 < Board.BOARDWIDTH && squares[sq.getXLoc() + 1][sq.getYLoc() - 1].getPieceOnSquare() != null){
+                sqToCheck = squares[sq.getXLoc() + 1][sq.getYLoc() - 1];
+                if (this.checkCapture(sqToCheck)){
+                    this.getPossibleMoves().add(sqToCheck);
+                }
             }
         }
-        else if (this.getPlayer().getPieceColour() == "Black"){
+        else if (this.getPlayer().getPieceColour().equals("Black")){
             // check for single square move down
-            if (sq.getYLoc() + 1 < Board.boardHeight && squares[sq.getXLoc()][sq.getYLoc() + 1].getPieceOnSquare() == null){
-                possibleMoves.add(squares[sq.getXLoc()][sq.getYLoc() + 1]);
+            if (sq.getYLoc() + 1 < Board.BOARDHEIGHT && squares[sq.getXLoc()][sq.getYLoc() + 1].getPieceOnSquare() == null){
+                sqToCheck = squares[sq.getXLoc()][sq.getYLoc() + 1];
+                this.getPossibleMoves().add(sqToCheck);
             }
             // check for double square move down
-            if (sq.getYLoc() + 2 < Board.boardHeight && squares[sq.getXLoc()][sq.getYLoc() + 1].getPieceOnSquare() == null 
+            if (sq.getYLoc() + 2 < Board.BOARDHEIGHT && squares[sq.getXLoc()][sq.getYLoc() + 1].getPieceOnSquare() == null 
                     && squares[sq.getXLoc()][sq.getYLoc() + 2].getPieceOnSquare() == null
                     && this.isFirstMove() == true){
-                possibleMoves.add(squares[sq.getXLoc()][sq.getYLoc() + 2]);
+                sqToCheck = squares[sq.getXLoc()][sq.getYLoc() + 2];
+                this.getPossibleMoves().add(sqToCheck);
             }
             // check for left diagonal capture
-            if (sq.getYLoc() + 1 < Board.boardHeight && sq.getXLoc() - 1 >= 0 && squares[sq.getXLoc() - 1][sq.getYLoc() + 1].getPieceOnSquare() != null){
-                possibleMoves.add(squares[sq.getXLoc() - 1][sq.getYLoc() + 1]);
+            if (sq.getYLoc() + 1 < Board.BOARDHEIGHT && sq.getXLoc() - 1 >= 0 && squares[sq.getXLoc() - 1][sq.getYLoc() + 1].getPieceOnSquare() != null){
+                sqToCheck = squares[sq.getXLoc() - 1][sq.getYLoc() + 1];
+                if (this.checkCapture(sqToCheck)){
+                    this.getPossibleMoves().add(sqToCheck);
+                }
             }
             // check for right diagonal capture
-            if (sq.getYLoc() + 1 < Board.boardHeight && sq.getXLoc() + 1 < Board.boardWidth && squares[sq.getXLoc() + 1][sq.getYLoc() + 1].getPieceOnSquare() != null){
-                possibleMoves.add(squares[sq.getXLoc() + 1][sq.getYLoc() + 1]);
+            if (sq.getYLoc() + 1 < Board.BOARDHEIGHT && sq.getXLoc() + 1 < Board.BOARDWIDTH && squares[sq.getXLoc() + 1][sq.getYLoc() + 1].getPieceOnSquare() != null){
+                sqToCheck = squares[sq.getXLoc() + 1][sq.getYLoc() + 1];
+                if (this.checkCapture(sqToCheck)){
+                    this.getPossibleMoves().add(sqToCheck);
+                }
             }
         }
 //        this.setFirstMove(false);//to be moved to makeMove method when created
         return this.getPossibleMoves();
+    }
+    
+    private boolean checkCapture(Square sq){
+        if(sq.getPieceOnSquare() == null){
+            return false;
+        }
+        else if(sq.getPieceOnSquare().getPlayer() == this.getPlayer()){
+            return false;
+        }
+        else{
+            return true;
+        }
     }
 
     public boolean isFirstMove() {
@@ -106,14 +105,6 @@ public class Pawn extends Piece{
 
     public void setFirstMove(boolean firstMove) {
         this.firstMove = firstMove;
-    }
-
-    public ArrayList<Square> getPossibleMoves() {
-        return possibleMoves;
-    }
-
-    public void setPossibleMoves(ArrayList<Square> possibleMoves) {
-        this.possibleMoves = possibleMoves;
     }
         
 }

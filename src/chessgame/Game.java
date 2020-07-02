@@ -55,6 +55,76 @@ public class Game implements ActionListener {
         if (newSq != null){ //if new Square was found in the 2D array
             this.setPreviousSquare(this.getSelectedSquare());
             this.setSelectedSquare(newSq);
+            if (this.getPreviousSquare() == null){
+                this.setPreviousSquare(this.getSelectedSquare());
+            }
+            if (this.getSelectedSquare() == this.getPreviousSquare()){
+                if(this.getSelectedSquare().getPieceOnSquare() == null){
+                    //do nothing
+                }
+                else if(this.getSelectedSquare().getPieceOnSquare().getPlayer() == this.currentMove){
+                    this.showPossibleMoves();
+                }
+                else if(this.getSelectedSquare().getPieceOnSquare().getPlayer() != this.currentMove){
+                    //do nothing
+                }
+            }
+            
+            else if(this.getSelectedSquare() != this.getPreviousSquare()){
+                if(this.getPreviousSquare().getPieceOnSquare() == null){
+                    if(this.getSelectedSquare().getPieceOnSquare() == null){
+                        //do nothing
+                    }
+                    else if(this.getSelectedSquare().getPieceOnSquare().getPlayer() == this.currentMove){
+                        this.showPossibleMoves();
+                    }
+                    else if(this.getSelectedSquare().getPieceOnSquare().getPlayer() != this.currentMove){
+                        //do nothing
+                    }
+                }
+                else if(this.getPreviousSquare().getPieceOnSquare().getPlayer() == this.currentMove){
+                    if(this.getSelectedSquare().getPieceOnSquare() == null){
+                        if(this.getPreviousSquare().getPieceOnSquare().getPossibleMoves().contains(this.getSelectedSquare())){
+                            this.getSquares()[this.getSelectedSquare().getXLoc()][this.getSelectedSquare().getYLoc()].setPieceOnSquare(this.getPreviousSquare().getPieceOnSquare());
+                            this.getSquares()[this.getPreviousSquare().getXLoc()][this.getPreviousSquare().getYLoc()].removePieceOnSquare();
+                            this.getBoard().recolourBoard();
+                            this.changeMove();
+                        }
+                        else{
+                            this.getBoard().recolourBoard();
+                        }
+                    }
+                    else if(this.getSelectedSquare().getPieceOnSquare().getPlayer() == this.currentMove){
+                        this.showPossibleMoves();
+                    }
+                    else if(this.getSelectedSquare().getPieceOnSquare().getPlayer() != this.currentMove){
+                        if(this.getPreviousSquare().getPieceOnSquare().getPossibleMoves().contains(this.getSelectedSquare())){
+                            this.getSquares()[this.getSelectedSquare().getXLoc()][this.getSelectedSquare().getYLoc()].setPieceOnSquare(this.getPreviousSquare().getPieceOnSquare());
+                            this.getSquares()[this.getPreviousSquare().getXLoc()][this.getPreviousSquare().getYLoc()].removePieceOnSquare();
+                            this.getBoard().recolourBoard();
+                            this.changeMove();
+                        }
+                        else{
+                            this.getBoard().recolourBoard();
+                        }
+                    }
+                }
+                else if(this.getPreviousSquare().getPieceOnSquare().getPlayer() != this.currentMove){
+                    if(this.getSelectedSquare().getPieceOnSquare() == null){
+                        //do nothing
+                    }
+                    else if(this.getSelectedSquare().getPieceOnSquare().getPlayer() == this.currentMove){
+                        this.getBoard().recolourBoard();
+                        this.showPossibleMoves();
+                    }
+                    else if(this.getSelectedSquare().getPieceOnSquare().getPlayer() != this.currentMove){
+                        //do nothing
+                    }
+                }
+                
+            }
+            
+            /*
             //if new square has a piece on it
             if (this.getSelectedSquare().getPieceOnSquare() != null){ 
                 System.out.println("" + this.getPreviousSquare() + ", " + this.getSelectedSquare());
@@ -122,6 +192,7 @@ public class Game implements ActionListener {
 
         else{
             System.out.println("This Square was not found");
+*/
         }
     }
     

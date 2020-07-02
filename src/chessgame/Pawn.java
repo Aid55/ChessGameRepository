@@ -72,27 +72,27 @@ public class Pawn extends Piece{
                 possibleMoves.add(squares[sq.getXLoc() - 1][sq.getYLoc() - 1]);
             }
             // check for right diagonal capture
-            if (sq.getYLoc() - 1 >= 0 && sq.getXLoc() + 1 <= 7 && squares[sq.getXLoc() + 1][sq.getYLoc() - 1].getPieceOnSquare() != null){
+            if (sq.getYLoc() - 1 >= 0 && sq.getXLoc() + 1 < Board.boardWidth && squares[sq.getXLoc() + 1][sq.getYLoc() - 1].getPieceOnSquare() != null){
                 possibleMoves.add(squares[sq.getXLoc() + 1][sq.getYLoc() - 1]);
             }
         }
         else if (this.getPlayer().getPieceColour() == "Black"){
             // check for single square move down
-            if (sq.getYLoc() + 1 <= 7 && squares[sq.getXLoc()][sq.getYLoc() + 1].getPieceOnSquare() == null){
+            if (sq.getYLoc() + 1 < Board.boardHeight && squares[sq.getXLoc()][sq.getYLoc() + 1].getPieceOnSquare() == null){
                 possibleMoves.add(squares[sq.getXLoc()][sq.getYLoc() + 1]);
             }
             // check for double square move down
-            if (sq.getYLoc() + 2 <= 7 && squares[sq.getXLoc()][sq.getYLoc() + 1].getPieceOnSquare() == null 
+            if (sq.getYLoc() + 2 < Board.boardHeight && squares[sq.getXLoc()][sq.getYLoc() + 1].getPieceOnSquare() == null 
                     && squares[sq.getXLoc()][sq.getYLoc() + 2].getPieceOnSquare() == null
                     && this.isFirstMove() == true){
                 possibleMoves.add(squares[sq.getXLoc()][sq.getYLoc() + 2]);
             }
             // check for left diagonal capture
-            if (sq.getYLoc() + 1 <= 7 && sq.getXLoc() - 1 >= 0 && squares[sq.getXLoc() - 1][sq.getYLoc() + 1].getPieceOnSquare() != null){
+            if (sq.getYLoc() + 1 < Board.boardHeight && sq.getXLoc() - 1 >= 0 && squares[sq.getXLoc() - 1][sq.getYLoc() + 1].getPieceOnSquare() != null){
                 possibleMoves.add(squares[sq.getXLoc() - 1][sq.getYLoc() + 1]);
             }
             // check for right diagonal capture
-            if (sq.getYLoc() + 1 <= 7 && sq.getXLoc() + 1 <= 7 && squares[sq.getXLoc() + 1][sq.getYLoc() + 1].getPieceOnSquare() != null){
+            if (sq.getYLoc() + 1 < Board.boardHeight && sq.getXLoc() + 1 < Board.boardWidth && squares[sq.getXLoc() + 1][sq.getYLoc() + 1].getPieceOnSquare() != null){
                 possibleMoves.add(squares[sq.getXLoc() + 1][sq.getYLoc() + 1]);
             }
         }

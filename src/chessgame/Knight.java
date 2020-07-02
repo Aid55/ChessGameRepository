@@ -62,7 +62,7 @@ public class Knight extends Piece{
             }
         }
         // 1 up 2 right
-        if (sq.getXLoc() + 2 <= 7 && sq.getYLoc() - 1 >= 0){ 
+        if (sq.getXLoc() + 2 < Board.boardWidth && sq.getYLoc() - 1 >= 0){ 
             sqToCheck = squares[sq.getXLoc() + 2][sq.getYLoc() - 1];
             if(sqToCheck.getPieceOnSquare() == null || sqToCheck.getPieceOnSquare().getPlayer() != sq.getPieceOnSquare().getPlayer()){
                 possibleMoves.add(sqToCheck);
@@ -79,7 +79,7 @@ public class Knight extends Piece{
         }
         // 2 up 1 right
         
-        if (sq.getXLoc() + 1 <= 7 && sq.getYLoc() - 2 >= 0){
+        if (sq.getXLoc() + 1 < Board.boardWidth && sq.getYLoc() - 2 >= 0){
             sqToCheck = squares[sq.getXLoc() + 1][sq.getYLoc() - 2];
             if(sqToCheck.getPieceOnSquare() == null || sqToCheck.getPieceOnSquare().getPlayer() != sq.getPieceOnSquare().getPlayer()){
                 possibleMoves.add(sqToCheck);
@@ -87,7 +87,7 @@ public class Knight extends Piece{
         }
         // 1 down 2 left
         
-        if (sq.getXLoc() - 2 >= 0 && sq.getYLoc() + 1 <= 7){
+        if (sq.getXLoc() - 2 >= 0 && sq.getYLoc() + 1 < Board.boardHeight){
             sqToCheck = squares[sq.getXLoc() - 2][sq.getYLoc() + 1];
             if(sqToCheck.getPieceOnSquare() == null || sqToCheck.getPieceOnSquare().getPlayer() != sq.getPieceOnSquare().getPlayer()){
                 possibleMoves.add(sqToCheck);
@@ -95,7 +95,7 @@ public class Knight extends Piece{
         }
         // 1 down 2 right
         
-        if (sq.getXLoc() + 2 <= 7 && sq.getYLoc() + 1 <= 7){
+        if (sq.getXLoc() + 2 < Board.boardWidth && sq.getYLoc() + 1 < Board.boardHeight){
             sqToCheck = squares[sq.getXLoc() + 2][sq.getYLoc() + 1];
             if(sqToCheck.getPieceOnSquare() == null || sqToCheck.getPieceOnSquare().getPlayer() != sq.getPieceOnSquare().getPlayer()){
                 possibleMoves.add(sqToCheck);
@@ -103,7 +103,7 @@ public class Knight extends Piece{
         }
         // 2 down 1 left
         
-        if (sq.getXLoc() - 1 >= 0 && sq.getYLoc() + 2 <= 7){
+        if (sq.getXLoc() - 1 >= 0 && sq.getYLoc() + 2 < Board.boardHeight){
             sqToCheck = squares[sq.getXLoc() - 1][sq.getYLoc() + 2];
             if(sqToCheck.getPieceOnSquare() == null || sqToCheck.getPieceOnSquare().getPlayer() != sq.getPieceOnSquare().getPlayer()){
                 possibleMoves.add(sqToCheck);
@@ -111,7 +111,7 @@ public class Knight extends Piece{
         }
         // 2 down 1 right
         
-        if (sq.getXLoc() + 1 <= 7 && sq.getYLoc() + 2 <= 7){
+        if (sq.getXLoc() + 1 < Board.boardWidth && sq.getYLoc() + 2 < Board.boardHeight){
             sqToCheck = squares[sq.getXLoc() + 1][sq.getYLoc() + 2];
             if(sqToCheck.getPieceOnSquare() == null || sqToCheck.getPieceOnSquare().getPlayer() != sq.getPieceOnSquare().getPlayer()){
                 possibleMoves.add(sqToCheck);

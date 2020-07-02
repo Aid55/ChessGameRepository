@@ -19,11 +19,9 @@ public class Game implements ActionListener {
     private Square[][] squares;
     private Player white;
     private Player black;
-    private boolean gameOver = false;
     private Square selectedSquare;
     private Square previousSquare;
     private Player currentMove;
-    private boolean pieceSelected = false;
     
     public Game(Board board, Square[][] squares, Player white, Player black){
         this.board = board;
@@ -35,8 +33,8 @@ public class Game implements ActionListener {
     }
     
     private void addActionListeners(){
-        for (int y=0; y< this.getBoard().getBoardHeight(); y++){
-            for (int x=0; x<this.getBoard().getBoardWidth(); x++){
+        for (int y=0; y < Board.BOARDHEIGHT; y++){
+            for (int x=0; x < Board.BOARDWIDTH; x++){
                 this.squares[x][y].addActionListener(this);
             }
         }
@@ -45,8 +43,8 @@ public class Game implements ActionListener {
     public void actionPerformed(ActionEvent anEvent){
         Object source = anEvent.getSource();
         Square newSq = null;
-        for (int y=0; y< this.getBoard().getBoardHeight(); y++){
-            for (int x=0; x<this.getBoard().getBoardWidth(); x++){
+        for (int y=0; y < Board.BOARDHEIGHT; y++){
+            for (int x=0; x < Board.BOARDWIDTH; x++){
                 if (source == this.squares[x][y]){
                     newSq = this.squares[x][y];
                 }
@@ -63,7 +61,7 @@ public class Game implements ActionListener {
                     //do nothing
                 }
                 else if(this.getSelectedSquare().getPieceOnSquare().getPlayer() == this.currentMove){
-                    this.showPossibleMoves();
+                    this.showPossibleMoves(this.getSelectedSquare());
                 }
                 else if(this.getSelectedSquare().getPieceOnSquare().getPlayer() != this.currentMove){
                     //do nothing
@@ -76,7 +74,7 @@ public class Game implements ActionListener {
                         //do nothing
                     }
                     else if(this.getSelectedSquare().getPieceOnSquare().getPlayer() == this.currentMove){
-                        this.showPossibleMoves();
+                        this.showPossibleMoves(this.getSelectedSquare());
                     }
                     else if(this.getSelectedSquare().getPieceOnSquare().getPlayer() != this.currentMove){
                         //do nothing
@@ -87,25 +85,25 @@ public class Game implements ActionListener {
                         if(this.getPreviousSquare().getPieceOnSquare().getPossibleMoves().contains(this.getSelectedSquare())){
                             this.getSquares()[this.getSelectedSquare().getXLoc()][this.getSelectedSquare().getYLoc()].setPieceOnSquare(this.getPreviousSquare().getPieceOnSquare());
                             this.getSquares()[this.getPreviousSquare().getXLoc()][this.getPreviousSquare().getYLoc()].removePieceOnSquare();
-                            this.getBoard().recolourBoard();
+                            this.getBoard().recolourBoardSquares();
                             this.changeMove();
                         }
                         else{
-                            this.getBoard().recolourBoard();
+                            this.getBoard().recolourBoardSquares();
                         }
                     }
                     else if(this.getSelectedSquare().getPieceOnSquare().getPlayer() == this.currentMove){
-                        this.showPossibleMoves();
+                        this.showPossibleMoves(this.getSelectedSquare());
                     }
                     else if(this.getSelectedSquare().getPieceOnSquare().getPlayer() != this.currentMove){
                         if(this.getPreviousSquare().getPieceOnSquare().getPossibleMoves().contains(this.getSelectedSquare())){
                             this.getSquares()[this.getSelectedSquare().getXLoc()][this.getSelectedSquare().getYLoc()].setPieceOnSquare(this.getPreviousSquare().getPieceOnSquare());
                             this.getSquares()[this.getPreviousSquare().getXLoc()][this.getPreviousSquare().getYLoc()].removePieceOnSquare();
-                            this.getBoard().recolourBoard();
+                            this.getBoard().recolourBoardSquares();
                             this.changeMove();
                         }
                         else{
-                            this.getBoard().recolourBoard();
+                            this.getBoard().recolourBoardSquares();
                         }
                     }
                 }
@@ -114,8 +112,8 @@ public class Game implements ActionListener {
                         //do nothing
                     }
                     else if(this.getSelectedSquare().getPieceOnSquare().getPlayer() == this.currentMove){
-                        this.getBoard().recolourBoard();
-                        this.showPossibleMoves();
+                        this.getBoard().recolourBoardSquares();
+                        this.showPossibleMoves(this.getSelectedSquare());
                     }
                     else if(this.getSelectedSquare().getPieceOnSquare().getPlayer() != this.currentMove){
                         //do nothing
@@ -124,81 +122,12 @@ public class Game implements ActionListener {
                 
             }
             
-            /*
-            //if new square has a piece on it
-            if (this.getSelectedSquare().getPieceOnSquare() != null){ 
-                System.out.println("" + this.getPreviousSquare() + ", " + this.getSelectedSquare());
-                //if new square is a piece of the same colour as the player who's turn it is AND the new square is different to the old square
-                if (this.getSelectedSquare().getPieceOnSquare().getPlayer() == this.getCurrentMove() 
-                        && this.getPreviousSquare() != this.getSelectedSquare()){ 
-                    //if there's no piece currently selected
-                    if (!pieceSelected){
-                        this.pieceSelected = true;
-                        this.showPossibleMoves();
-                    }
-                    //if a piece is currently selected (of the same colour)
-                    else if (pieceSelected){
-                        this.showPossibleMoves();
-                    }
-                }
-               
-                // if selected sq is a new square that has a piece which is NOT the same colour as the player who's turn it is
-                if (this.getSelectedSquare().getPieceOnSquare().getPlayer() != this.getCurrentMove() 
-                        && this.getPreviousSquare() != this.getSelectedSquare()){
-                    this.pieceSelected = false;
-                    //no previous square (likely first square clicked)
-                    if(this.getPreviousSquare() == null){
-                        System.out.println("No previous square selected");
-                    }
-                    //if prev piece is same colour as the player who's turn it is
-                    else if (this.getPreviousSquare().getPieceOnSquare().getPlayer() == this.getCurrentMove()){
-                        if(this.getPreviousSquare().getPieceOnSquare().getPossibleMoves().contains(this.getSelectedSquare())){
-                            System.out.println("This is a capture");
-                            this.getSquares()[this.getSelectedSquare().getXLoc()][this.getSelectedSquare().getYLoc()].setPieceOnSquare(this.getPreviousSquare().getPieceOnSquare());
-                            this.getSquares()[this.getPreviousSquare().getXLoc()][this.getPreviousSquare().getYLoc()].removePieceOnSquare();
-                            this.setPreviousSquare(null);
-                            this.getBoard().recolourBoard();
-                            this.changeMove();
-                        }
-                    }
-                }
-                
-                
-            }
-            //if there isn't a piece on the square and a piece was on the previous square
-            else if(this.getSelectedSquare().getPieceOnSquare() == null && pieceSelected){
-                System.out.println("This Square has no Piece"); 
-                this.pieceSelected = false;
-                //if new empty square is a possbile move for the previous piece, move there
-                if (this.getPreviousSquare().getPieceOnSquare().getPossibleMoves().contains(this.getSelectedSquare())){
-                    System.out.println("This is a possible move");
-                    this.getSquares()[this.getSelectedSquare().getXLoc()][this.getSelectedSquare().getYLoc()].setPieceOnSquare(this.getPreviousSquare().getPieceOnSquare());
-                    this.getSquares()[this.getPreviousSquare().getXLoc()][this.getPreviousSquare().getYLoc()].removePieceOnSquare();
-                    this.setPreviousSquare(null);
-                    this.getBoard().recolourBoard();
-                    this.changeMove();
-                }
-                //else remove possible moves from board
-                else{
-                    System.out.println("This is not a possible move");
-                    this.getBoard().recolourBoard();
-                }
-            }
-
-            else{
-                System.out.println("No piece on prev or current square");
-            }
-        }
-
-        else{
-            System.out.println("This Square was not found");
-*/
         }
     }
     
-    private void showPossibleMoves(){
-        this.getBoard().displayPossibleMoves(this.getSelectedSquare().getPieceOnSquare().findPossibleMoves(this.getSquares()));
-        this.getBoard().setSelectedSquareColour(this.getSelectedSquare());
+    private void showPossibleMoves(Square sq){
+        this.getBoard().displayPossibleMoves(sq.getPieceOnSquare().findPossibleMoves(this.getSquares()));
+        this.getBoard().setSelectedSquareColour(sq);
     }
             
 

@@ -15,52 +15,45 @@ import javax.swing.JPanel;
  * @author atbat
  */
 public class Board extends JPanel{
-    public static final int boardWidth = 8;
-    public static final int boardHeight = 8;
-    private Square[][] squares = new Square[boardWidth][boardHeight];
+    public static final int BOARDWIDTH = 8;
+    public static final int BOARDHEIGHT = 8;
+    private Square[][] squares = new Square[BOARDWIDTH][BOARDHEIGHT];
     
     
     public Board(){
         this.createBoard();
-        this.setVisible(true);
+        super.setVisible(true);
     }
     
     private void createBoard(){
-        this.setLayout(new GridLayout(boardWidth,boardHeight));
-        for (int y=0; y<boardHeight; y++){
-            for (int x=0; x<boardWidth; x++){
+        this.setLayout(new GridLayout(BOARDWIDTH,BOARDHEIGHT));
+        for (int y=0; y<BOARDHEIGHT; y++){
+            for (int x=0; x<BOARDWIDTH; x++){
                 this.squares[x][y] = new Square(x, y);
                 this.add(squares[x][y]);
             }
         }
+        this.recolourBoardSquares();
         
     }
     
-    public void recolourBoard(){
-        for (int y=0; y<boardHeight; y++){
-            for (int x=0; x<boardWidth; x++){
+    public void recolourBoardSquares(){
+        for (int y=0; y<BOARDHEIGHT; y++){
+            for (int x=0; x<BOARDWIDTH; x++){
                 this.squares[x][y].initColour();
             }
         }
     }
     
     public void displayPossibleMoves(ArrayList<Square> possibleMoves){
-        this.recolourBoard();
+        this.recolourBoardSquares();
         for (Square sq : possibleMoves){
-            sq.setColour(Color.yellow);
+            sq.setBackground(Color.yellow);
         }    
     }
     
     public void setSelectedSquareColour(Square s){
-        s.setColour(Color.ORANGE);
-    }
-
-    public int getBoardWidth() {
-        return boardWidth;
-    }
-
-    public int getBoardHeight() {
-        return boardHeight;
+        s.setBackground(Color.ORANGE);
     }
 
     public Square[][] getSquares() {

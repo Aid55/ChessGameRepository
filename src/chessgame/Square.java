@@ -6,7 +6,6 @@
 package chessgame;
 
 import java.awt.Color;
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 
 /**
@@ -14,50 +13,41 @@ import javax.swing.JButton;
  * @author atbat
  */
 public class Square extends JButton{
-    private int x;
-    private int y;
+    private int xLoc;
+    private int yLoc;
     private Piece pieceOnSquare;
     
     public Square(int x, int y){
-        super(String.valueOf(x) + ", " + String.valueOf(y));
-//        super();
-        this.x = x;
-        this.y = y;
-        this.initColour();
-        this.setOpaque(true);
+//        super(String.valueOf(x) + ", " + String.valueOf(y));
+        super();
+        this.xLoc = x;
+        this.yLoc = y;
+        super.setOpaque(true);
     }
     
     public void initColour(){
-        if ((x % 2 == 0 && y % 2 == 0) || (x % 2 == 1 && y % 2 == 1)){
-            this.setColour(Color.GRAY);
+        if ((this.getXLoc() % 2 == 0 && this.getYLoc() % 2 == 0) || (this.getXLoc() % 2 == 1 && this.getYLoc() % 2 == 1)){
+            super.setBackground(Color.GRAY);
         }
         else{
-            this.setColour(Color.WHITE);
+            super.setBackground(Color.WHITE);
         }
-    }
-
-    public Color getColour() {
-        return this.getBackground();
-    }
-
-    public void setColour(Color colour) {
-        this.setBackground(colour);
     }
     
     public int getXLoc() {
-        return x;
+        return this.xLoc;
     }
 
     public void setXLoc(int x) {
-        this.x = x;
+        this.xLoc = x;
     }
 
     public int getYLoc() {
-        return y;
+        return this.yLoc;
     }
 
     public void setYLoc(int y) {
-        this.y = y;
+        this.yLoc = y;
     }
     
     public Piece getPieceOnSquare() {
@@ -77,9 +67,6 @@ public class Square extends JButton{
     
     @Override
     public String toString() {
-        return "Square{" + "x=" + x + ", y=" + y + '}';
-    }
-    
-    
-    
+        return "Square{" + "x=" + xLoc + ", y=" + yLoc + '}';
+    }  
 }

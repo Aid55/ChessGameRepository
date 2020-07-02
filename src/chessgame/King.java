@@ -19,6 +19,7 @@ public class King extends Piece{
     
     public static String whiteImg = "images/WhiteKing.png";
     public static String blackImg = "images/BlackKing.png";
+    private ArrayList<Square> possibleMoves = new ArrayList<>();
         
     public King(Player player){
         super(player);
@@ -48,7 +49,81 @@ public class King extends Piece{
 
     @Override
     public ArrayList<Square> findPossibleMoves(Square[][] squares) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Square sq = this.getSquare();
+        this.getPossibleMoves().clear();
+        Square sqToCheck = null;
+        // 1 up 1 left
+        if (sq.getXLoc() - 1 >= 0 && sq.getYLoc() - 1 >= 0){
+            sqToCheck = squares[sq.getXLoc() - 1][sq.getYLoc() - 1];
+            if(sqToCheck.getPieceOnSquare() == null || sqToCheck.getPieceOnSquare().getPlayer() != sq.getPieceOnSquare().getPlayer()){
+                possibleMoves.add(sqToCheck);
+            }
+        }
+        // 1 up 1 right
+        if (sq.getXLoc() + 1 < Board.boardWidth && sq.getYLoc() - 1 >= 0){ 
+            sqToCheck = squares[sq.getXLoc() + 1][sq.getYLoc() - 1];
+            if(sqToCheck.getPieceOnSquare() == null || sqToCheck.getPieceOnSquare().getPlayer() != sq.getPieceOnSquare().getPlayer()){
+                possibleMoves.add(sqToCheck);
+            }
+        }
+        // 1 up        
+        if (sq.getYLoc() - 1 >= 0){
+            sqToCheck = squares[sq.getXLoc()][sq.getYLoc() - 1];
+            if(sqToCheck.getPieceOnSquare() == null || sqToCheck.getPieceOnSquare().getPlayer() != sq.getPieceOnSquare().getPlayer()){
+                possibleMoves.add(sqToCheck);
+            }
+            
+        }
+        // 1 right
+        if (sq.getXLoc() + 1 < Board.boardWidth){
+            sqToCheck = squares[sq.getXLoc() + 1][sq.getYLoc()];
+            if(sqToCheck.getPieceOnSquare() == null || sqToCheck.getPieceOnSquare().getPlayer() != sq.getPieceOnSquare().getPlayer()){
+                possibleMoves.add(sqToCheck);
+            }
+        }
+        // 1 left
+        if (sq.getXLoc() - 1 >= 0){
+            sqToCheck = squares[sq.getXLoc() - 1][sq.getYLoc()];
+            if(sqToCheck.getPieceOnSquare() == null || sqToCheck.getPieceOnSquare().getPlayer() != sq.getPieceOnSquare().getPlayer()){
+                possibleMoves.add(sqToCheck);
+            }
+        }
+        // 1 down 1 right
+        
+        if (sq.getXLoc() + 1 < Board.boardWidth && sq.getYLoc() + 1 < Board.boardHeight){
+            sqToCheck = squares[sq.getXLoc() + 1][sq.getYLoc() + 1];
+            if(sqToCheck.getPieceOnSquare() == null || sqToCheck.getPieceOnSquare().getPlayer() != sq.getPieceOnSquare().getPlayer()){
+                possibleMoves.add(sqToCheck);
+            }
+        }
+        // 1 down 1 left
+        
+        if (sq.getXLoc() - 1 >= 0 && sq.getYLoc() + 1 < Board.boardHeight){
+            sqToCheck = squares[sq.getXLoc() - 1][sq.getYLoc() + 1];
+            if(sqToCheck.getPieceOnSquare() == null || sqToCheck.getPieceOnSquare().getPlayer() != sq.getPieceOnSquare().getPlayer()){
+                possibleMoves.add(sqToCheck);
+            }
+        }
+        // 1 down
+        
+        if (sq.getYLoc() + 1 < Board.boardHeight){
+            sqToCheck = squares[sq.getXLoc()][sq.getYLoc() + 1];
+            if(sqToCheck.getPieceOnSquare() == null || sqToCheck.getPieceOnSquare().getPlayer() != sq.getPieceOnSquare().getPlayer()){
+                possibleMoves.add(sqToCheck);
+            }
+        }
+        
+        return this.getPossibleMoves();
+        
+    }
+    
+    public ArrayList<Square> getPossibleMoves() {
+        return possibleMoves;
+    }
+
+    public void setPossibleMoves(ArrayList<Square> possibleMoves) {
+        this.possibleMoves = possibleMoves;
     }
     
 }

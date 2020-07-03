@@ -98,7 +98,14 @@ public class Pawn extends Piece{
             return true;
         }
     }
-
+    
+    @Override
+    public void moveMade(){
+        if(this.isFirstMove()){
+            this.setFirstMove(false);
+        }
+    }
+    
     public boolean isFirstMove() {
         return firstMove;
     }

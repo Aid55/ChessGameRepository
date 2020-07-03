@@ -127,5 +127,9 @@ public class Queen extends Piece{
             return true;
         }
     }
+
+    public void moveMade(){
+        
+    }
     
 }

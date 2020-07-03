@@ -83,5 +83,9 @@ public class King extends Piece{
         }
         return this.getPossibleMoves();
     }
+
+    public void moveMade(){
+        
+    }
     
 }

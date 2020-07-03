@@ -103,7 +103,9 @@ import javax.swing.ImageIcon;
     }
     
     protected abstract ArrayList<Square> findPossibleMoves(Square[][] squares);
-
+    
+    protected abstract void moveMade();
+    
     @Override
     public String toString() {
         return "Piece{" + "player=" + player.toString() + ", pieceImage=" + pieceImage.toString() + '}';

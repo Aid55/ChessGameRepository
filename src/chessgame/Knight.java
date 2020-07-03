@@ -83,5 +83,9 @@ public class Knight extends Piece{
         }
         return this.getPossibleMoves();
     }
+
+    public void moveMade(){
+        
+    }
     
 }

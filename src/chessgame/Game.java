@@ -83,10 +83,7 @@ public class Game implements ActionListener {
                 else if(this.getPreviousSquare().getPieceOnSquare().getPlayer() == this.currentMove){
                     if(this.getSelectedSquare().getPieceOnSquare() == null){
                         if(this.getPreviousSquare().getPieceOnSquare().getPossibleMoves().contains(this.getSelectedSquare())){
-                            this.getSquares()[this.getSelectedSquare().getXLoc()][this.getSelectedSquare().getYLoc()].setPieceOnSquare(this.getPreviousSquare().getPieceOnSquare());
-                            this.getSquares()[this.getPreviousSquare().getXLoc()][this.getPreviousSquare().getYLoc()].removePieceOnSquare();
-                            this.getBoard().recolourBoardSquares();
-                            this.changeMove();
+                            this.makeMove();
                         }
                         else{
                             this.getBoard().recolourBoardSquares();
@@ -97,10 +94,7 @@ public class Game implements ActionListener {
                     }
                     else if(this.getSelectedSquare().getPieceOnSquare().getPlayer() != this.currentMove){
                         if(this.getPreviousSquare().getPieceOnSquare().getPossibleMoves().contains(this.getSelectedSquare())){
-                            this.getSquares()[this.getSelectedSquare().getXLoc()][this.getSelectedSquare().getYLoc()].setPieceOnSquare(this.getPreviousSquare().getPieceOnSquare());
-                            this.getSquares()[this.getPreviousSquare().getXLoc()][this.getPreviousSquare().getYLoc()].removePieceOnSquare();
-                            this.getBoard().recolourBoardSquares();
-                            this.changeMove();
+                            this.makeMove();
                         }
                         else{
                             this.getBoard().recolourBoardSquares();
@@ -129,7 +123,14 @@ public class Game implements ActionListener {
         this.getBoard().displayPossibleMoves(sq.getPieceOnSquare().findPossibleMoves(this.getSquares()));
         this.getBoard().setSelectedSquareColour(sq);
     }
-            
+    
+    private void makeMove(){
+        this.getSquares()[this.getSelectedSquare().getXLoc()][this.getSelectedSquare().getYLoc()].setPieceOnSquare(this.getPreviousSquare().getPieceOnSquare());
+        this.getSquares()[this.getPreviousSquare().getXLoc()][this.getPreviousSquare().getYLoc()].removePieceOnSquare();
+        this.getBoard().recolourBoardSquares();
+        this.getSelectedSquare().getPieceOnSquare().moveMade();
+        this.changeMove();
+    }            
 
     private void startGame(){
         this.currentMove = this.white;

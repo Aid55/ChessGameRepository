@@ -14,7 +14,9 @@ import javax.swing.JPanel;
  */
 public class ScorePanel extends JPanel{
     
-    
+    /**
+     *
+     */
     public ScorePanel(){
         super();
         super.setBackground(Color.LIGHT_GRAY);

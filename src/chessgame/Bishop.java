@@ -13,6 +13,10 @@ import java.util.ArrayList;
  */
 public class Bishop extends Piece{
         
+    /**
+     *
+     * @param player
+     */
     public Bishop(Player player){
         super(player);
         super.setWhiteImg("images/WhiteBishop.png");
@@ -20,6 +24,11 @@ public class Bishop extends Piece{
         this.loadImage(player);
     }
 
+    /**
+     *
+     * @param squares
+     * @return
+     */
     @Override
     public ArrayList<Square> findPossibleMoves(Square[][] squares) {
         Square sq = this.getSquare();
@@ -103,6 +112,9 @@ public class Bishop extends Piece{
         }
     }
 
+    /**
+     *
+     */
     public void moveMade(){
         
     }

@@ -15,6 +15,10 @@ public class Pawn extends Piece{
     
     private boolean firstMove = true;
         
+    /**
+     *
+     * @param player
+     */
     public Pawn(Player player){
         super(player);
         super.setWhiteImg("images/WhitePawn.png");
@@ -22,6 +26,11 @@ public class Pawn extends Piece{
         super.loadImage(player);
     }
     
+    /**
+     *
+     * @param squares
+     * @return
+     */
     @Override
     public ArrayList<Square> findPossibleMoves(Square[][] squares) {
         Square sq = this.getSquare();
@@ -99,6 +108,9 @@ public class Pawn extends Piece{
         }
     }
     
+    /**
+     *
+     */
     @Override
     public void moveMade(){
         if(this.isFirstMove()){
@@ -106,10 +118,18 @@ public class Pawn extends Piece{
         }
     }
     
+    /**
+     *
+     * @return
+     */
     public boolean isFirstMove() {
         return firstMove;
     }
 
+    /**
+     *
+     * @param firstMove
+     */
     public void setFirstMove(boolean firstMove) {
         this.firstMove = firstMove;
     }

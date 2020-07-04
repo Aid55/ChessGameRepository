@@ -13,6 +13,10 @@ import java.util.ArrayList;
  */
 public class King extends Piece{
         
+    /**
+     *
+     * @param player
+     */
     public King(Player player){
         super(player);
         super.setWhiteImg("images/WhiteKing.png");
@@ -20,6 +24,11 @@ public class King extends Piece{
         this.loadImage(player);
     }
     
+    /**
+     *
+     * @param squares
+     * @return
+     */
     @Override
     public ArrayList<Square> findPossibleMoves(Square[][] squares) {
         Square sq = this.getSquare();
@@ -84,6 +93,9 @@ public class King extends Piece{
         return this.getPossibleMoves();
     }
 
+    /**
+     *
+     */
     public void moveMade(){
         
     }

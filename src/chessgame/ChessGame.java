@@ -15,6 +15,9 @@ import javax.swing.JFrame;
  */
 public class ChessGame extends JFrame{
     
+    /**
+     *
+     */
     public ChessGame(){
         super();
         super.setTitle("Chess Game by Aidan");

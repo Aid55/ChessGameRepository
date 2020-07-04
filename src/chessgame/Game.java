@@ -23,6 +23,13 @@ public class Game implements ActionListener {
     private Square previousSquare;
     private Player currentMove;
     
+    /**
+     *
+     * @param board
+     * @param squares
+     * @param white
+     * @param black
+     */
     public Game(Board board, Square[][] squares, Player white, Player black){
         this.board = board;
         this.squares = squares;
@@ -162,42 +169,82 @@ public class Game implements ActionListener {
         }
     }
     
+    /**
+     *
+     * @return
+     */
     public Board getBoard() {
         return board;
     }
 
+    /**
+     *
+     * @param board
+     */
     public void setBoard(Board board) {
         this.board = board;
     }
 
+    /**
+     *
+     * @return
+     */
     public Square[][] getSquares() {
         return squares;
     }
 
+    /**
+     *
+     * @param squares
+     */
     public void setSquares(Square[][] squares) {
         this.squares = squares;
     }
 
+    /**
+     *
+     * @return
+     */
     public Square getPreviousSquare() {
         return previousSquare;
     }
 
+    /**
+     *
+     * @param previousSquare
+     */
     public void setPreviousSquare(Square previousSquare) {
         this.previousSquare = previousSquare;
     }
 
+    /**
+     *
+     * @return
+     */
     public Square getSelectedSquare() {
         return selectedSquare;
     }
 
+    /**
+     *
+     * @param selectedSquare
+     */
     public void setSelectedSquare(Square selectedSquare) {
         this.selectedSquare = selectedSquare;
     }
 
+    /**
+     *
+     * @return
+     */
     public Player getCurrentMove() {
         return currentMove;
     }
 
+    /**
+     *
+     * @param currentMove
+     */
     public void setCurrentMove(Player currentMove) {
         this.currentMove = currentMove;
     }

@@ -15,11 +15,21 @@ import javax.swing.JPanel;
  * @author atbat
  */
 public class Board extends JPanel{
+
+    /**
+     *
+     */
     public static final int BOARDWIDTH = 8;
+
+    /**
+     *
+     */
     public static final int BOARDHEIGHT = 8;
     private Square[][] squares = new Square[BOARDWIDTH][BOARDHEIGHT];
     
-    
+    /**
+     *
+     */
     public Board(){
         this.createBoard();
         super.setVisible(true);
@@ -37,6 +47,9 @@ public class Board extends JPanel{
         
     }
     
+    /**
+     *
+     */
     public void recolourBoardSquares(){
         for (int y=0; y<BOARDHEIGHT; y++){
             for (int x=0; x<BOARDWIDTH; x++){
@@ -45,6 +58,10 @@ public class Board extends JPanel{
         }
     }
     
+    /**
+     *
+     * @param possibleMoves
+     */
     public void displayPossibleMoves(ArrayList<Square> possibleMoves){
         this.recolourBoardSquares();
         for (Square sq : possibleMoves){
@@ -52,14 +69,26 @@ public class Board extends JPanel{
         }    
     }
     
+    /**
+     *
+     * @param s
+     */
     public void setSelectedSquareColour(Square s){
         s.setBackground(Color.ORANGE);
     }
 
+    /**
+     *
+     * @return
+     */
     public Square[][] getSquares() {
         return squares;
     }
 
+    /**
+     *
+     * @param squares
+     */
     public void setSquares(Square[][] squares) {
         this.squares = squares;
     }   

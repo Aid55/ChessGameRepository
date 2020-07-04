@@ -23,10 +23,18 @@ import javax.swing.ImageIcon;
     private ImageIcon pieceImage;
     private ArrayList<Square> possibleMoves = new ArrayList<>();
     
+    /**
+     *
+     * @param player
+     */
     public Piece(Player player){
         this.player = player;
     }
     
+    /**
+     *
+     * @param player
+     */
     protected void loadImage(Player player) {
         if (whiteImg != null && blackImg != null){
             switch (player.getPieceColour()) {
@@ -54,56 +62,112 @@ import javax.swing.ImageIcon;
         
     }
 
+    /**
+     *
+     * @return
+     */
     protected ImageIcon getPieceImage() {
         return pieceImage;
     }
 
+    /**
+     *
+     * @param pieceImage
+     */
     protected void setPieceImage(ImageIcon pieceImage) {
         this.pieceImage = pieceImage;
     }
     
+    /**
+     *
+     * @return
+     */
     protected Player getPlayer() {
         return player;
     }
 
+    /**
+     *
+     * @param player
+     */
     protected void setPlayer(Player player) {
         this.player = player;
     }
 
+    /**
+     *
+     * @return
+     */
     protected Square getSquare() {
         return square;
     }
 
+    /**
+     *
+     * @param square
+     */
     protected void setSquare(Square square) {
         this.square = square;
     }
     
+    /**
+     *
+     * @return
+     */
     protected ArrayList<Square> getPossibleMoves() {
         return possibleMoves;
     }
 
+    /**
+     *
+     * @param possibleMoves
+     */
     protected void setPossibleMoves(ArrayList<Square> possibleMoves) {
         this.possibleMoves = possibleMoves;
     }
     
+    /**
+     *
+     * @return
+     */
     protected String getWhiteImg() {
         return whiteImg;
     }
 
+    /**
+     *
+     * @param whiteImg
+     */
     protected void setWhiteImg(String whiteImg) {
         this.whiteImg = whiteImg;
     }
 
+    /**
+     *
+     * @return
+     */
     protected String getBlackImg() {
         return blackImg;
     }
 
+    /**
+     *
+     * @param blackImg
+     */
     protected void setBlackImg(String blackImg) {
         this.blackImg = blackImg;
     }
     
+    /**
+     *
+     * @param squares
+     * @return
+     */
     protected abstract ArrayList<Square> findPossibleMoves(Square[][] squares);
     
+    /**
+     *
+     */
     protected abstract void moveMade();
     
     @Override

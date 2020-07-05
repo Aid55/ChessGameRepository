@@ -8,14 +8,13 @@ package chessgame;
 import java.util.ArrayList;
 
 /**
- *
- * @author atbat
+ * A class to represent a King in chess
  */
 public class King extends Piece{
         
     /**
-     *
-     * @param player
+     * Creates a Piece object for a Player
+     * @param player Player object
      */
     public King(Player player){
         super(player);
@@ -25,9 +24,9 @@ public class King extends Piece{
     }
     
     /**
-     *
-     * @param squares
-     * @return
+     * Finds, checks and returns the possible moves for this object
+     * @param squares A 2D array of Square objects
+     * @return ArrayList of Square objects
      */
     @Override
     public ArrayList<Square> findPossibleMoves(Square[][] squares) {

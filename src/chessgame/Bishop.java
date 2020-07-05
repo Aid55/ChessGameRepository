@@ -8,14 +8,13 @@ package chessgame;
 import java.util.ArrayList;
 
 /**
- *
- * @author atbat
+ * A class to represent a Bishop in chess
  */
 public class Bishop extends Piece{
         
     /**
-     *
-     * @param player
+     * Creates a Bishop object for a Player
+     * @param player Player object
      */
     public Bishop(Player player){
         super(player);
@@ -25,9 +24,9 @@ public class Bishop extends Piece{
     }
 
     /**
-     *
-     * @param squares
-     * @return
+     * Finds, checks and returns the possible moves for this object
+     * @param squares A 2D array of Square objects
+     * @return ArrayList of Square objects
      */
     @Override
     public ArrayList<Square> findPossibleMoves(Square[][] squares) {

@@ -8,16 +8,15 @@ package chessgame;
 import java.util.ArrayList;
 
 /**
- *
- * @author atbat
+ * A class to represent a Pawn in chess
  */
 public class Pawn extends Piece{
     
     private boolean firstMove = true;
         
     /**
-     *
-     * @param player
+     * Creates a Pawn object for a Player
+     * @param player Player object
      */
     public Pawn(Player player){
         super(player);
@@ -27,9 +26,9 @@ public class Pawn extends Piece{
     }
     
     /**
-     *
-     * @param squares
-     * @return
+     * Finds, checks and returns the possible moves for this object
+     * @param squares A 2D array of Square objects
+     * @return ArrayList of Square objects
      */
     @Override
     public ArrayList<Square> findPossibleMoves(Square[][] squares) {
@@ -109,7 +108,7 @@ public class Pawn extends Piece{
     }
     
     /**
-     *
+     * Sets the firstMove variable to false when this is moved.
      */
     @Override
     public void moveMade(){
@@ -119,16 +118,16 @@ public class Pawn extends Piece{
     }
     
     /**
-     *
-     * @return
+     * Returns the firstMove variable for this object
+     * @return firstMove boolean value
      */
     public boolean isFirstMove() {
         return firstMove;
     }
 
     /**
-     *
-     * @param firstMove
+     * Sets the firstMove variable for this object
+     * @param firstMove boolean value
      */
     public void setFirstMove(boolean firstMove) {
         this.firstMove = firstMove;

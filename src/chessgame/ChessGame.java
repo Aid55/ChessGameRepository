@@ -10,13 +10,12 @@ import java.awt.FlowLayout;
 import javax.swing.JFrame;
 
 /**
- *
- * @author atbat
+ * A class representing a chess game
  */
 public class ChessGame extends JFrame{
     
     /**
-     *
+     * Creates a ChessGame object
      */
     public ChessGame(){
         super();

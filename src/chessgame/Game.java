@@ -10,8 +10,7 @@ import java.awt.event.ActionListener;
 import java.util.concurrent.TimeUnit;
 
 /**
- *
- * @author atbat
+ * A class representing a game
  */
 public class Game implements ActionListener {
     
@@ -24,11 +23,12 @@ public class Game implements ActionListener {
     private Player currentMove;
     
     /**
-     *
-     * @param board
-     * @param squares
-     * @param white
-     * @param black
+     * Creates a Game object with a Board object, a 2d Array of Square objects, 
+     * and two Player objects
+     * @param board Board object
+     * @param squares 2D Array of Square objects
+     * @param white Player object
+     * @param black Player object
      */
     public Game(Board board, Square[][] squares, Player white, Player black){
         this.board = board;
@@ -170,80 +170,80 @@ public class Game implements ActionListener {
     }
     
     /**
-     *
-     * @return
+     * Returns the board variable of this object
+     * @return board Board object
      */
     public Board getBoard() {
         return board;
     }
 
     /**
-     *
-     * @param board
+     * Sets the board variable of this object
+     * @param board Board object
      */
     public void setBoard(Board board) {
         this.board = board;
     }
 
     /**
-     *
-     * @return
+     * Returns the squares variable of this object
+     * @return squares 2D Array of Square objects
      */
     public Square[][] getSquares() {
         return squares;
     }
 
     /**
-     *
-     * @param squares
+     * Sets the squares variable of this object
+     * @param squares 2D Array of Square objects
      */
     public void setSquares(Square[][] squares) {
         this.squares = squares;
     }
 
     /**
-     *
-     * @return
+     * Returns the previousSquare variable of this object
+     * @return previousSquare Square object
      */
     public Square getPreviousSquare() {
         return previousSquare;
     }
 
     /**
-     *
-     * @param previousSquare
+     * Sets the previousSquare variable of this object
+     * @param previousSquare Square object
      */
     public void setPreviousSquare(Square previousSquare) {
         this.previousSquare = previousSquare;
     }
 
     /**
-     *
-     * @return
+     * Returns the selectedSquare variable of this object
+     * @return selectedSquare Square object
      */
     public Square getSelectedSquare() {
         return selectedSquare;
     }
 
     /**
-     *
-     * @param selectedSquare
+     * Sets the selectedSquare variable of this object
+     * @param selectedSquare Square object
      */
     public void setSelectedSquare(Square selectedSquare) {
         this.selectedSquare = selectedSquare;
     }
 
     /**
-     *
-     * @return
+     * Returns the currentMove variable of this object
+     * @return currentMove Player object
      */
     public Player getCurrentMove() {
         return currentMove;
     }
 
     /**
-     *
-     * @param currentMove
+     * Sets the currentMove variable of this object
+     * @param currentMove Player object
      */
     public void setCurrentMove(Player currentMove) {
         this.currentMove = currentMove;

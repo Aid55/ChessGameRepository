@@ -8,14 +8,13 @@ package chessgame;
 import java.util.ArrayList;
 
 /**
- *
- * @author atbat
+ * A class to represent a Rook in chess
  */
 public class Rook extends Piece{
         
     /**
-     *
-     * @param player
+     * Creates a Rook object for a Player
+     * @param player Player object
      */
     public Rook(Player player){
         super(player);
@@ -25,9 +24,10 @@ public class Rook extends Piece{
     }
 
     /**
-     *
-     * @param squares
-     * @return
+     * Finds and returns the possible moves for this object
+     * Checks each possible move to see if it is valid.
+     * @param squares A 2D array of Square objects
+     * @return ArrayList of Square objects
      */
     @Override
     public ArrayList<Square> findPossibleMoves(Square[][] squares) {
@@ -80,7 +80,7 @@ public class Rook extends Piece{
     }
 
     /**
-     *
+     * 
      */
     public void moveMade(){
         

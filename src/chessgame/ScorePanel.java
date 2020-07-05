@@ -9,13 +9,12 @@ import java.awt.Color;
 import javax.swing.JPanel;
 
 /**
- *
- * @author atbat
+ * A ScorePanel represents a panel showing the current scoring
  */
 public class ScorePanel extends JPanel{
     
     /**
-     *
+     * Creates a ScorePanel object
      */
     public ScorePanel(){
         super();

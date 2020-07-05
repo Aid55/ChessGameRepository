@@ -6,8 +6,7 @@
 package chessgame;
 
 /**
- *
- * @author atbat
+ * A class representing a chess Player
  */
 public class Player {
     
@@ -32,9 +31,9 @@ public class Player {
     private Piece[] pieces;
 
     /**
-     * 
-     * @param pieceColour
-     * @param squares
+     * Creates a Player object
+     * @param pieceColour String representing a colour
+     * @param squares 2D array of Square objects
      */
     public Player(String pieceColour, Square[][] squares) {
         this.pieceColour = pieceColour;
@@ -106,288 +105,288 @@ public class Player {
     }
 
     /**
-     *
-     * @return
+     * Returns the pieceColour variable of this object
+     * @return pieceColour String object
      */
     public String getPieceColour() {
         return pieceColour;
     }
 
     /**
-     *
-     * @param pieceColour
+     * Sets the pieceColour variable of this object
+     * @param pieceColour String object
      */
     public void setPieceColour(String pieceColour) {
         this.pieceColour = pieceColour;
     }
 
     /**
-     *
-     * @return
+     * Returns the pieces variable of this object
+     * @return pieces Array of Piece objects
      */
     public Piece[] getPieces() {
         return pieces;
     }
 
     /**
-     *
-     * @param pieces
+     * Sets the pieces variable of this object
+     * @param pieces Array of Piece objects
      */
     public void setPieces(Piece[] pieces) {
         this.pieces = pieces;
     }
 
     /**
-     *
-     * @return
+     * Returns the aPawn variable of this object
+     * @return aPawn Pawn Object
      */
     public Pawn getaPawn() {
         return aPawn;
     }
 
     /**
-     *
-     * @param aPawn
+     * Sets the aPawn variable of this object
+     * @param aPawn Pawn object
      */
     public void setaPawn(Pawn aPawn) {
         this.aPawn = aPawn;
     }
 
     /**
-     *
-     * @return
+     * Returns the bPawn variable of this object
+     * @return bPawn Pawn object
      */
     public Pawn getbPawn() {
         return bPawn;
     }
 
     /**
-     *
-     * @param bPawn
+     * Sets the bPawn variable of this object
+     * @param bPawn Pawn object
      */
     public void setbPawn(Pawn bPawn) {
         this.bPawn = bPawn;
     }
 
     /**
-     *
-     * @return
+     * Returns the cPawn variable of this object
+     * @return cPawn Pawn object
      */
     public Pawn getcPawn() {
         return cPawn;
     }
 
     /**
-     *
-     * @param cPawn
+     * Sets the cPawn variable of this object
+     * @param cPawn Pawn object
      */
     public void setcPawn(Pawn cPawn) {
         this.cPawn = cPawn;
     }
 
     /**
-     *
-     * @return
+     * Returns the dPawn variable of this object
+     * @return dPawn Pawn object
      */
     public Pawn getdPawn() {
         return dPawn;
     }
 
     /**
-     *
-     * @param dPawn
+     * Sets the dPawn variable of this object
+     * @param dPawn Pawn object
      */
     public void setdPawn(Pawn dPawn) {
         this.dPawn = dPawn;
     }
 
     /**
-     *
-     * @return
+     * Returns the ePawn variable of this object
+     * @return ePawn Pawn object
      */
     public Pawn getePawn() {
         return ePawn;
     }
 
     /**
-     *
-     * @param ePawn
+     * Sets the ePawn variable of this object
+     * @param ePawn Pawn object
      */
     public void setePawn(Pawn ePawn) {
         this.ePawn = ePawn;
     }
 
     /**
-     *
-     * @return
+     * Returns the fPawn variable of this object
+     * @return fPawn Pawn object
      */
     public Pawn getfPawn() {
         return fPawn;
     }
 
     /**
-     *
-     * @param fPawn
+     * Sets the fPawn variable of this object
+     * @param fPawn Pawn object
      */
     public void setfPawn(Pawn fPawn) {
         this.fPawn = fPawn;
     }
 
     /**
-     *
-     * @return
+     * Returns the gPawn variable of this object
+     * @return gPawn Pawn object
      */
     public Pawn getgPawn() {
         return gPawn;
     }
 
     /**
-     *
-     * @param gPawn
+     * Sets the gPawn variable of this object
+     * @param gPawn Pawn object
      */
     public void setgPawn(Pawn gPawn) {
         this.gPawn = gPawn;
     }
 
     /**
-     *
-     * @return
+     * Returns the hPawn variable of this object
+     * @return hPawn Pawn object
      */
     public Pawn gethPawn() {
         return hPawn;
     }
 
     /**
-     *
-     * @param hPawn
+     * Sets the hPawn variable of this object
+     * @param hPawn Pawn object
      */
     public void sethPawn(Pawn hPawn) {
         this.hPawn = hPawn;
     }
 
     /**
-     *
-     * @return
+     * Returns the kingSideKnight variable of this object
+     * @return kingSideKnight Knight object
      */
     public Knight getKingSideKnight() {
         return kingSideKnight;
     }
 
     /**
-     *
-     * @param kingSideKnight
+     * Sets the kingSideKnight variable of this object
+     * @param kingSideKnight Knight object
      */
     public void setKingSideKnight(Knight kingSideKnight) {
         this.kingSideKnight = kingSideKnight;
     }
 
     /**
-     *
-     * @return
+     * Returns the queenSideKnight variable of this object
+     * @return queenSideKnight Knight object
      */
     public Knight getQueenSideKnight() {
         return queenSideKnight;
     }
 
     /**
-     *
-     * @param queenSideKnight
+     * Sets the queenSideKnight variable of this object
+     * @param queenSideKnight Knight object
      */
     public void setQueenSideKnight(Knight queenSideKnight) {
         this.queenSideKnight = queenSideKnight;
     }
 
     /**
-     *
-     * @return
+     * Returns the darkSqBishop variable of this object
+     * @return darkSqBishop Bishop object
      */
     public Bishop getDarkSqBishop() {
         return darkSqBishop;
     }
 
     /**
-     *
-     * @param darkSqBishop
+     * Sets the darkSqBishop variable of this object
+     * @param darkSqBishop Bishop object
      */
     public void setDarkSqBishop(Bishop darkSqBishop) {
         this.darkSqBishop = darkSqBishop;
     }
 
     /**
-     *
-     * @return
+     * Returns the lightSqBishop variable of this object
+     * @return lightSqBishop Bishop object
      */
     public Bishop getLightSqBishop() {
         return lightSqBishop;
     }
 
     /**
-     *
-     * @param lightSqBishop
+     * Sets the lightSqBishop variable of this object
+     * @param lightSqBishop Bishop object
      */
     public void setLightSqBishop(Bishop lightSqBishop) {
         this.lightSqBishop = lightSqBishop;
     }
 
     /**
-     *
-     * @return
+     * Returns the kingSideRook variable of this object
+     * @return kingSideRook Rook object
      */
     public Rook getKingSideRook() {
         return kingSideRook;
     }
 
     /**
-     *
-     * @param kingSideRook
+     * Sets the kingSideRook variable of this object
+     * @param kingSideRook Rook object
      */
     public void setKingSideRook(Rook kingSideRook) {
         this.kingSideRook = kingSideRook;
     }
 
     /**
-     *
-     * @return
+     * Returns the queenSideRook variable of this object
+     * @return queenSideRook Rook object
      */
     public Rook getQueenSideRook() {
         return queenSideRook;
     }
 
     /**
-     *
-     * @param queenSideRook
+     * Sets the queenSideRook variable of this object
+     * @param queenSideRook Rook object
      */
     public void setQueenSideRook(Rook queenSideRook) {
         this.queenSideRook = queenSideRook;
     }
 
     /**
-     *
-     * @return
+     * Returns the king variable of this object
+     * @return king King object
      */
     public King getKing() {
         return king;
     }
 
     /**
-     *
-     * @param king
+     * Sets the king variable of this object
+     * @param king King object
      */
     public void setKing(King king) {
         this.king = king;
     }
 
     /**
-     *
-     * @return
+     * Returns the queen variable of this object
+     * @return queen Queen object
      */
     public Queen getQueen() {
         return queen;
     }
 
     /**
-     *
-     * @param queen
+     * Returns the queen variable of this object
+     * @param queen Queen object
      */
     public void setQueen(Queen queen) {
         this.queen = queen;

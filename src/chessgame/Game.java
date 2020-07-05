@@ -7,7 +7,6 @@ package chessgame;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.concurrent.TimeUnit;
 
 /**
  * A class representing a game
@@ -20,7 +19,7 @@ public class Game implements ActionListener {
     private Player black;
     private Square selectedSquare;
     private Square previousSquare;
-    private Player currentMove;
+    private Player playerTurn;
     
     /**
      * Creates a Game object with a Board object, a 2d Array of Square objects, 
@@ -60,69 +59,75 @@ public class Game implements ActionListener {
         if (newSq != null){ //if new Square was found in the 2D array
             this.setPreviousSquare(this.getSelectedSquare());
             this.setSelectedSquare(newSq);
+            //if first click
             if (this.getPreviousSquare() == null){
-                this.setPreviousSquare(this.getSelectedSquare());
+                this.setPreviousSquare(newSq);
             }
-            if (this.getSelectedSquare() == this.getPreviousSquare()){
-                if(this.getSelectedSquare().getPieceOnSquare() == null){
+            this.checkSquaresForMoves(this.getPreviousSquare(), this.getSelectedSquare());            
+        }
+    }
+    
+    private void checkSquaresForMoves(Square prevSq, Square newSq){
+        //if same piece
+        if (newSq == prevSq){
+            if(newSq.getPieceOnSquare() == null){
+                //do nothing
+            }
+            else if(newSq.getPieceOnSquare().getPlayer() == this.playerTurn){
+                this.showPossibleMoves(newSq);
+            }
+            else if(newSq.getPieceOnSquare().getPlayer() != this.playerTurn){
+                //do nothing
+            }
+        }
+        //if not same piece
+        else if(newSq != prevSq){
+            //if nothing on old square
+            if(prevSq.getPieceOnSquare() == null){
+                if(newSq.getPieceOnSquare() == null){
                     //do nothing
                 }
-                else if(this.getSelectedSquare().getPieceOnSquare().getPlayer() == this.currentMove){
-                    this.showPossibleMoves(this.getSelectedSquare());
+                else if(newSq.getPieceOnSquare().getPlayer() == this.playerTurn){
+                    this.showPossibleMoves(newSq);
                 }
-                else if(this.getSelectedSquare().getPieceOnSquare().getPlayer() != this.currentMove){
+                else if(newSq.getPieceOnSquare().getPlayer() != this.playerTurn){
                     //do nothing
                 }
             }
-            
-            else if(this.getSelectedSquare() != this.getPreviousSquare()){
-                if(this.getPreviousSquare().getPieceOnSquare() == null){
-                    if(this.getSelectedSquare().getPieceOnSquare() == null){
-                        //do nothing
+            //if same colour piece on old square
+            else if(prevSq.getPieceOnSquare().getPlayer() == this.playerTurn){
+                if(newSq.getPieceOnSquare() == null){
+                    if(prevSq.getPieceOnSquare().getPossibleMoves().contains(newSq)){
+                        this.makeMove(this.getPreviousSquare(), this.getSelectedSquare());
                     }
-                    else if(this.getSelectedSquare().getPieceOnSquare().getPlayer() == this.currentMove){
-                        this.showPossibleMoves(this.getSelectedSquare());
-                    }
-                    else if(this.getSelectedSquare().getPieceOnSquare().getPlayer() != this.currentMove){
-                        //do nothing
-                    }
-                }
-                else if(this.getPreviousSquare().getPieceOnSquare().getPlayer() == this.currentMove){
-                    if(this.getSelectedSquare().getPieceOnSquare() == null){
-                        if(this.getPreviousSquare().getPieceOnSquare().getPossibleMoves().contains(this.getSelectedSquare())){
-                            this.makeMove();
-                        }
-                        else{
-                            this.getBoard().recolourBoardSquares();
-                        }
-                    }
-                    else if(this.getSelectedSquare().getPieceOnSquare().getPlayer() == this.currentMove){
-                        this.showPossibleMoves(this.getSelectedSquare());
-                    }
-                    else if(this.getSelectedSquare().getPieceOnSquare().getPlayer() != this.currentMove){
-                        if(this.getPreviousSquare().getPieceOnSquare().getPossibleMoves().contains(this.getSelectedSquare())){
-                            this.makeMove();
-                        }
-                        else{
-                            this.getBoard().recolourBoardSquares();
-                        }
-                    }
-                }
-                else if(this.getPreviousSquare().getPieceOnSquare().getPlayer() != this.currentMove){
-                    if(this.getSelectedSquare().getPieceOnSquare() == null){
-                        //do nothing
-                    }
-                    else if(this.getSelectedSquare().getPieceOnSquare().getPlayer() == this.currentMove){
+                    else{
                         this.getBoard().recolourBoardSquares();
-                        this.showPossibleMoves(this.getSelectedSquare());
-                    }
-                    else if(this.getSelectedSquare().getPieceOnSquare().getPlayer() != this.currentMove){
-                        //do nothing
                     }
                 }
-                
+                else if(newSq.getPieceOnSquare().getPlayer() == this.playerTurn){
+                    this.showPossibleMoves(newSq);
+                }
+                else if(newSq.getPieceOnSquare().getPlayer() != this.playerTurn){
+                    if(prevSq.getPieceOnSquare().getPossibleMoves().contains(newSq)){
+                        this.makeMove(this.getPreviousSquare(), this.getSelectedSquare());
+                    }
+                    else{
+                        this.getBoard().recolourBoardSquares();
+                    }
+                }
             }
-            
+            //if other colour piece on old square
+            else if(prevSq.getPieceOnSquare().getPlayer() != this.playerTurn){
+                if(newSq.getPieceOnSquare() == null){
+                    //do nothing
+                }
+                else if(newSq.getPieceOnSquare().getPlayer() == this.playerTurn){
+                    this.showPossibleMoves(newSq);
+                }
+                else if(newSq.getPieceOnSquare().getPlayer() != this.playerTurn){
+                    //do nothing
+                }
+            }
         }
     }
     
@@ -131,16 +136,16 @@ public class Game implements ActionListener {
         this.getBoard().setSelectedSquareColour(sq);
     }
     
-    private void makeMove(){
-        this.getSquares()[this.getSelectedSquare().getXLoc()][this.getSelectedSquare().getYLoc()].setPieceOnSquare(this.getPreviousSquare().getPieceOnSquare());
-        this.getSquares()[this.getPreviousSquare().getXLoc()][this.getPreviousSquare().getYLoc()].removePieceOnSquare();
+    private void makeMove(Square prevSq, Square newSq){
+        this.getSquares()[newSq.getXLoc()][newSq.getYLoc()].setPieceOnSquare(prevSq.getPieceOnSquare());
+        this.getSquares()[prevSq.getXLoc()][prevSq.getYLoc()].removePieceOnSquare();
         this.getBoard().recolourBoardSquares();
-        this.getSelectedSquare().getPieceOnSquare().moveMade();
-        this.changeMove();
+        newSq.getPieceOnSquare().moveMade();
+        this.changePlayerTurn();
     }            
 
     private void startGame(){
-        this.currentMove = this.white;
+        this.playerTurn = this.white;
 //        while (gameOver != true){
 //            try{
 //                TimeUnit.SECONDS.sleep(10);
@@ -148,24 +153,24 @@ public class Game implements ActionListener {
 //            catch (Exception e){
 //                
 //            }
-//            if (this.currentMove == this.white){
-//                this.currentMove = this.black;
+//            if (this.playerTurn == this.white){
+//                this.playerTurn = this.black;
 //                System.out.println("blacks move");
 //                
 //            }
-//            else if (this.currentMove == this.black){
-//                this.currentMove = this.white;
+//            else if (this.playerTurn == this.black){
+//                this.playerTurn = this.white;
 //                System.out.println("whites move");
 //            }
 //        }
     }
     
-    private void changeMove(){
-        if (this.getCurrentMove() == this.white){
-            this.setCurrentMove(this.black);
+    private void changePlayerTurn(){
+        if (this.getPlayerTurn() == this.white){
+            this.setPlayerTurn(this.black);
         }
         else{
-            this.setCurrentMove(this.white);
+            this.setPlayerTurn(this.white);
         }
     }
     
@@ -234,19 +239,19 @@ public class Game implements ActionListener {
     }
 
     /**
-     * Returns the currentMove variable of this object
-     * @return currentMove Player object
+     * Returns the playerTurn variable of this object
+     * @return playerTurn Player object
      */
-    public Player getCurrentMove() {
-        return currentMove;
+    public Player getPlayerTurn() {
+        return playerTurn;
     }
 
     /**
-     * Sets the currentMove variable of this object
-     * @param currentMove Player object
+     * Sets the playerTurn variable of this object
+     * @param playerTurn Player object
      */
-    public void setCurrentMove(Player currentMove) {
-        this.currentMove = currentMove;
+    public void setPlayerTurn(Player playerTurn) {
+        this.playerTurn = playerTurn;
     }
     
     

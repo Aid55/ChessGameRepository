@@ -169,7 +169,7 @@ public abstract class Piece {
     /**
      * 
      */
-    protected abstract void moveMade();
+    protected abstract void moveMade(Piece movedPiece);
     
     @Override
     public String toString() {

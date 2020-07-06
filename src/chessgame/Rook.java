@@ -82,7 +82,7 @@ public class Rook extends Piece{
     /**
      * 
      */
-    public void moveMade(){
+    public void moveMade(Piece movedPiece){
         
     }
     

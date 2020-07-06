@@ -7,6 +7,7 @@ package chessgame;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.JOptionPane;
 
 /**
  * A class representing a game
@@ -20,6 +21,7 @@ public class Game implements ActionListener {
     private Square selectedSquare;
     private Square previousSquare;
     private Player playerTurn;
+    private Player otherPlayer;
     
     /**
      * Creates a Game object with a Board object, a 2d Array of Square objects, 
@@ -34,8 +36,10 @@ public class Game implements ActionListener {
         this.squares = squares;
         this.white = white;
         this.black = black;
+        this.playerTurn = white;
+        this.otherPlayer = black;
         this.addActionListeners();
-        this.startGame();
+//        this.startGame();
     }
     
     private void addActionListeners(){
@@ -140,12 +144,53 @@ public class Game implements ActionListener {
         this.getSquares()[newSq.getXLoc()][newSq.getYLoc()].setPieceOnSquare(prevSq.getPieceOnSquare());
         this.getSquares()[prevSq.getXLoc()][prevSq.getYLoc()].removePieceOnSquare();
         this.getBoard().recolourBoardSquares();
-        newSq.getPieceOnSquare().moveMade();
-        this.changePlayerTurn();
-    }            
+        //If Pawn, check for double square first moved and enPassant capture
+        if (newSq.getPieceOnSquare() instanceof Pawn){
+            Pawn tempPawn = (Pawn)newSq.getPieceOnSquare();
+            if (tempPawn.isFirstMove()){
+                tempPawn.checkFirstMove();
+            }
+            this.enPassantCheck(tempPawn, newSq, prevSq);
+            this.changePlayerTurn();
+        }
+        //Trigger logic for each piece on board after each move
+        for(Piece p : this.white.getPieces()){
+            p.moveMade(this.getSelectedSquare().getPieceOnSquare());
+        }
+        for(Piece p : this.black.getPieces()){
+            p.moveMade(this.getSelectedSquare().getPieceOnSquare());
+        }
+    }
+    
+    private void enPassantCheck(Pawn tempPawn, Square newSq, Square prevSq){
+        try{
+            Square sqToCheck = squares[prevSq.getXLoc() - 1][prevSq.getYLoc()];
+            if (sqToCheck.getPieceOnSquare() instanceof Pawn && sqToCheck.getPieceOnSquare().getPlayer() != newSq.getPieceOnSquare().getPlayer()){
+                tempPawn = (Pawn)sqToCheck.getPieceOnSquare();
+                if(tempPawn.isEnPassable()){
+                    sqToCheck.removePieceOnSquare();
+                }
+            }
+        }
+        catch(Exception e){
+            System.out.println("sqToCheck outside of boardWith boundary");
+        }
+        try{
+            Square sqToCheck = squares[prevSq.getXLoc() + 1][prevSq.getYLoc()];
+            if (sqToCheck.getPieceOnSquare() instanceof Pawn && sqToCheck.getPieceOnSquare().getPlayer() != newSq.getPieceOnSquare().getPlayer()){
+                tempPawn = (Pawn)sqToCheck.getPieceOnSquare();
+                if(tempPawn.isEnPassable()){
+                    sqToCheck.removePieceOnSquare();
+                }
+            } 
+        }
+        catch(Exception e){
+            System.out.println("sqToCheck outside of boardWith boundary");
+        }     
+    }    
 
     private void startGame(){
-        this.playerTurn = this.white;
+//        this.playerTurn = this.white;
 //        while (gameOver != true){
 //            try{
 //                TimeUnit.SECONDS.sleep(10);
@@ -168,9 +213,11 @@ public class Game implements ActionListener {
     private void changePlayerTurn(){
         if (this.getPlayerTurn() == this.white){
             this.setPlayerTurn(this.black);
+            this.setOtherPlayer(this.white);
         }
         else{
             this.setPlayerTurn(this.white);
+            this.setOtherPlayer(this.black);
         }
     }
     
@@ -253,7 +300,13 @@ public class Game implements ActionListener {
     public void setPlayerTurn(Player playerTurn) {
         this.playerTurn = playerTurn;
     }
-    
-    
+
+    public Player getOtherPlayer() {
+        return otherPlayer;
+    }
+
+    public void setOtherPlayer(Player otherPlayer) {
+        this.otherPlayer = otherPlayer;
+    }
     
 }

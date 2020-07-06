@@ -139,7 +139,7 @@ public class Queen extends Piece{
     /**
      *
      */
-    public void moveMade(){
+    public void moveMade(Piece movedPiece){
         
     }
     

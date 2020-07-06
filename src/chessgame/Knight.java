@@ -95,7 +95,7 @@ public class Knight extends Piece{
     /**
      *
      */
-    public void moveMade(){
+    public void moveMade(Piece movedPiece){
         
     }
     

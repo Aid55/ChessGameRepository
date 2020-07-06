@@ -5,6 +5,7 @@
  */
 package chessgame;
 
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Arrays;
@@ -138,13 +139,14 @@ public class Game implements ActionListener {
     
     private void showPossibleMoves(Square sq){
         this.getBoard().displayPossibleMoves(sq.getPieceOnSquare().findPossibleMoves(this.getSquares()));
-        this.getBoard().setSelectedSquareColour(sq);
+        this.getBoard().setSelectedSquareColour(sq, Color.ORANGE);
     }
     
     private void makeMove(Square prevSq, Square newSq){
         this.getSquares()[newSq.getXLoc()][newSq.getYLoc()].setPieceOnSquare(prevSq.getPieceOnSquare());
         this.getSquares()[prevSq.getXLoc()][prevSq.getYLoc()].removePieceOnSquare();
         this.getBoard().recolourBoardSquares();
+        this.checkForCheck(newSq.getPieceOnSquare());
         //If Pawn, check for double square first moved and enPassant capture
         if (newSq.getPieceOnSquare() instanceof Pawn){
             Pawn tempPawn = (Pawn)newSq.getPieceOnSquare();
@@ -153,8 +155,7 @@ public class Game implements ActionListener {
             }
             this.enPassantCheck(tempPawn, newSq, prevSq);
             this.checkPawnPromotion(tempPawn);
-            
-        }
+        }        
         this.changePlayerTurn();
         //Trigger logic for each piece on board after each move
         for(Piece p : this.white.getPieces()){
@@ -163,6 +164,17 @@ public class Game implements ActionListener {
         for(Piece p : this.black.getPieces()){
             p.moveMade(this.getSelectedSquare().getPieceOnSquare());
         }
+    }
+    
+    private void checkForCheck(Piece piece){
+        if (piece.findPossibleMoves(this.squares).contains(otherPlayer.getKing().getSquare())){
+            otherPlayer.getKing().setChecked(true);
+            this.getBoard().setSelectedSquareColour(otherPlayer.getKing().getSquare(), Color.GREEN);
+        }
+//        for(Square sq : piece.findPossibleMoves(squares)){
+//            this.getBoard().setSelectedSquareColour(sq, Color.GREEN);
+//        }
+
     }
     
     private void enPassantCheck(Pawn tempPawn, Square newSq, Square prevSq){

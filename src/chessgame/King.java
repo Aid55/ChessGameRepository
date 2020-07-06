@@ -12,6 +12,8 @@ import java.util.ArrayList;
  */
 public class King extends Piece{
         
+    private boolean checked = false;
+    
     /**
      * Creates a Piece object for a Player
      * @param player Player object
@@ -98,5 +100,15 @@ public class King extends Piece{
     public void moveMade(Piece movedPiece){
         
     }
+
+    public boolean isChecked() {
+        return checked;
+    }
+
+    public void setChecked(boolean checked) {
+        this.checked = checked;
+    }
+    
+    
     
 }

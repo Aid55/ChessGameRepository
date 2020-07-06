@@ -72,8 +72,8 @@ public class Board extends JPanel{
      * Changes the colour of a board square
      * @param s Square object
      */
-    public void setSelectedSquareColour(Square s){
-        s.setBackground(Color.ORANGE);
+    public void setSelectedSquareColour(Square s, Color c){
+        s.setBackground(c);
     }
 
     /**

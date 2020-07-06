@@ -5,6 +5,8 @@
  */
 package chessgame;
 
+import java.util.ArrayList;
+
 /**
  * A class representing a chess Player
  */
@@ -28,7 +30,7 @@ public class Player {
     private Pawn fPawn;
     private Pawn gPawn;
     private Pawn hPawn;
-    private Piece[] pieces;
+    private ArrayList<Piece> pieces = new ArrayList<>();
 
     /**
      * Creates a Player object
@@ -79,8 +81,22 @@ public class Player {
             this.squares[5][7].setPieceOnSquare(darkSqBishop);
             this.squares[1][7].setPieceOnSquare(queenSideKnight);
             this.squares[6][7].setPieceOnSquare(kingSideKnight);
-            this.pieces = new Piece[]{aPawn, bPawn, cPawn, dPawn, ePawn, fPawn, gPawn, hPawn, king, queen, kingSideRook, 
-                queenSideRook, lightSqBishop, darkSqBishop, queenSideKnight, kingSideKnight};
+            this.pieces.add(aPawn);
+            this.pieces.add(bPawn);
+            this.pieces.add(cPawn);
+            this.pieces.add(dPawn); 
+            this.pieces.add(ePawn);
+            this.pieces.add(fPawn);
+            this.pieces.add(gPawn);
+            this.pieces.add(hPawn);
+            this.pieces.add(king);
+            this.pieces.add(queen);
+            this.pieces.add(kingSideRook); 
+            this.pieces.add(queenSideRook);
+            this.pieces.add(lightSqBishop);
+            this.pieces.add(darkSqBishop);
+            this.pieces.add(queenSideKnight); 
+            this.pieces.add(kingSideKnight);
         }
         else if (this.getPieceColour().equals("Black")){
             this.squares[0][1].setPieceOnSquare(aPawn);
@@ -99,8 +115,22 @@ public class Player {
             this.squares[5][0].setPieceOnSquare(darkSqBishop);
             this.squares[1][0].setPieceOnSquare(kingSideKnight);
             this.squares[6][0].setPieceOnSquare(queenSideKnight);
-            this.pieces = new Piece[]{aPawn, bPawn, cPawn, dPawn, ePawn, fPawn, gPawn, hPawn, king, queen, kingSideRook, 
-                queenSideRook, lightSqBishop, darkSqBishop, queenSideKnight, kingSideKnight};
+            this.pieces.add(aPawn);
+            this.pieces.add(bPawn);
+            this.pieces.add(cPawn);
+            this.pieces.add(dPawn); 
+            this.pieces.add(ePawn);
+            this.pieces.add(fPawn);
+            this.pieces.add(gPawn);
+            this.pieces.add(hPawn);
+            this.pieces.add(king);
+            this.pieces.add(queen);
+            this.pieces.add(kingSideRook); 
+            this.pieces.add(queenSideRook);
+            this.pieces.add(lightSqBishop);
+            this.pieces.add(darkSqBishop);
+            this.pieces.add(queenSideKnight); 
+            this.pieces.add(kingSideKnight);
         }
     }
 
@@ -122,18 +152,37 @@ public class Player {
 
     /**
      * Returns the pieces variable of this object
-     * @return pieces Array of Piece objects
+     * @return pieces ArrayList of Piece objects
      */
-    public Piece[] getPieces() {
+    public ArrayList<Piece> getPieces() {
         return pieces;
     }
 
     /**
      * Sets the pieces variable of this object
-     * @param pieces Array of Piece objects
+     * @param pieces ArrayList of Piece objects
      */
-    public void setPieces(Piece[] pieces) {
+    public void setPieces(ArrayList<Piece> pieces) {
         this.pieces = pieces;
+    }
+    
+    public void addPiece(Piece p){
+        this.pieces.add(p);
+        System.out.println("New piece added");
+    }
+    
+    public void removePiece(Piece p){
+        for (Piece x : this.pieces){
+            if(x == p){
+                this.pieces.remove(x);
+                System.out.println("Old piece found and removed");
+                break;
+
+            }
+        }
+        for(Piece i:this.pieces){
+            System.out.println("" + i.getClass());
+        }
     }
 
     /**

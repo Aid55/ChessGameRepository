@@ -7,6 +7,7 @@ package chessgame;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Arrays;
 import javax.swing.JOptionPane;
 
 /**
@@ -151,8 +152,10 @@ public class Game implements ActionListener {
                 tempPawn.checkFirstMove();
             }
             this.enPassantCheck(tempPawn, newSq, prevSq);
-            this.changePlayerTurn();
+            this.checkPawnPromotion(tempPawn);
+            
         }
+        this.changePlayerTurn();
         //Trigger logic for each piece on board after each move
         for(Piece p : this.white.getPieces()){
             p.moveMade(this.getSelectedSquare().getPieceOnSquare());
@@ -187,7 +190,55 @@ public class Game implements ActionListener {
         catch(Exception e){
             System.out.println("sqToCheck outside of boardWith boundary");
         }     
-    }    
+    }   
+    
+    private void checkPawnPromotion(Pawn pawn){
+        if (pawn.getPlayer().getPieceColour() == "White"){
+            if(pawn.getSquare().getYLoc() == 0){
+                this.promotePawn(pawn);
+            }            
+        }
+        else if(pawn.getPlayer().getPieceColour() == "Black"){
+            if(pawn.getSquare().getYLoc() == Board.BOARDHEIGHT - 1){
+                this.promotePawn(pawn);
+            }
+        }
+    }
+    
+    private void promotePawn(Pawn pawn){
+        String[] choices = new String[]{"Q", "R", "B", "K"};
+        String s = JOptionPane.showInputDialog("Q = Queen, R = Rook, B = Bishop, K = Knight");
+        while(!Arrays.asList(choices).contains(s)){
+            s = JOptionPane.showInputDialog("INVALID CHOICE, try again. Q = Queen, R = Rook, B = Bishop, K = Knight");
+        }
+        
+        switch(s){
+            case "Q":
+                Queen q = new Queen(pawn.getPlayer());
+                pawn.getSquare().setPieceOnSquare(q);
+                pawn.getPlayer().addPiece(q);
+                pawn.getPlayer().removePiece(pawn);
+                break;
+            case "R":
+                Rook r = new Rook(pawn.getPlayer());
+                pawn.getSquare().setPieceOnSquare(r);
+                pawn.getPlayer().addPiece(r);
+                pawn.getPlayer().removePiece(pawn);
+                break;
+            case "B":
+                Bishop b = new Bishop(pawn.getPlayer());
+                pawn.getSquare().setPieceOnSquare(b);
+                pawn.getPlayer().addPiece(b);
+                pawn.getPlayer().removePiece(pawn);
+                break;
+            case "K":
+                Knight k = new Knight(pawn.getPlayer());
+                pawn.getSquare().setPieceOnSquare(k);
+                pawn.getPlayer().addPiece(k);
+                pawn.getPlayer().removePiece(pawn);
+                break;
+        }
+    }
 
     private void startGame(){
 //        this.playerTurn = this.white;

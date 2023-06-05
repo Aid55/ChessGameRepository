@@ -1,6 +1,6 @@
 # ChessGameRepository
 Basic chess game to practice using objects within Java.
-Unfinished
+UNFINISHED
 
 ###TODO
 Pawn double square start - DONE
